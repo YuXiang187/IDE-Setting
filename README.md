@@ -1,4 +1,4 @@
-# Sublime Text3 笔记
+# Sublime Text 3 笔记
 
 ## 1.设置
 
