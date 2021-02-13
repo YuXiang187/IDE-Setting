@@ -75,23 +75,37 @@ ConvertToUTF8 能将除UTF8编码之外的其他编码文件在 Sublime Text 中
 
 在16进制的颜色值上点右键，选择“Choose color”,会弹出颜色拾色器，在需要的色块上单击。
 
-## 7.Alignment 插件
+## 7.AutoPep8 插件
 
-使代码格式的自动对齐，快捷键为`Ctrl+Alt+A`，会与QQ截图快捷键发生冲突
+自动将 Python 代码按 PEP8 规范格式化，安装完添加如下配置可自动在保存文件的时候格式化：
+
+```css
+{
+	"format_on_save": true,
+}
+```
 
 ## 8.AutoFileName 插件
 
 自动补全文件(目录)名
 
-## 9.SublimeCodeIntel 插件
+## 9.SublimeREPL 插件
 
-智能提示
+Python控制台，通过选项Tools->SublimeREPL->Python就可以看到效果了
 
 ## 10.SideBarEnhancements 插件
 
 侧栏菜单扩充功能
 
-## 11.Theme-Soda 主题
+## 11.Anaconda 插件
+
+代码分析平台，用于代码规范检查
+
+## 12.Jedi 插件
+
+Python智能补全插件
+
+## 12.Theme-Soda 主题
 
 Sublime Text 最受欢迎的主题之一，风格类似GNOME桌面
 
@@ -199,7 +213,7 @@ Ctrl+K+U 转换大写。
 Ctrl+K+L 转换小写。
 Ctrl+Z 撤销。
 Ctrl+Y 恢复撤销。
-Ctrl+U 软撤销，感觉和 Gtrl+Z 一样。
+Ctrl+U 软撤销，感觉和 Ctrl+Z 一样。
 Ctrl+F2 设置书签
 Ctrl+T 左右字母互换。
 F6 单词检测拼写
