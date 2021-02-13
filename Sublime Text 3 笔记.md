@@ -147,6 +147,8 @@ Sublime Text 最受欢迎的主题之一，风格类似GNOME桌面
 ]
 ```
 
+保存后在文本区域内输入一个括号，按下<key>Enter</key>试试
+
 ## 附：Sublime Text3 全部快捷键
 
 ### 命令类
