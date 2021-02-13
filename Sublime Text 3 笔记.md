@@ -107,7 +107,7 @@ Python控制台，通过选项Tools->SublimeREPL->Python就可以看到效果了
 
 Python智能补全插件
 
-**警告：禁止和Jedi共存，否则输入不了左括号**
+**警告：禁止和Anaconda共存，否则输入不了左括号**
 
 ## 12.Theme-Soda 主题
 
