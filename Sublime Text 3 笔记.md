@@ -1,4 +1,4 @@
-# Sublime Text 3 笔记
+# Sublime Text 3 技巧与配置
 
 ## 1.设置
 
@@ -130,6 +130,22 @@ Sublime Text 最受欢迎的主题之一，风格类似GNOME桌面
       "theme": "Soda Dark 3.sublime-theme",
   }
   ```
+
+## 方法：Sublime text输入括号后快速跳出
+
+将下列代码绑定到"Preferences" - "KeyBindings"
+
+```python
+[
+    {"keys": ["enter"], "command": "move", "args": {"by": "characters", "forward": true}, "context":
+        [
+            { "key": "following_text", "operator": "regex_contains", "operand": "^[)\\]\\>\\'\\\"\\ %>\\}\\;\\,]", "match_all": true },
+            { "key": "preceding_text", "operator": "not_regex_match", "operand": "^.*\\{$", "match_all": true  },
+            { "key": "auto_complete_visible", "operator": "equal", "operand": false }
+        ]
+    }
+]
+```
 
 ## 附：Sublime Text3 全部快捷键
 
