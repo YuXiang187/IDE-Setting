@@ -100,11 +100,13 @@ Python控制台，通过选项Tools->SublimeREPL->Python就可以看到效果了
 ## 11.Anaconda 插件
 
 代码分析平台，用于代码规范检查
+
 **警告：禁止和Jedi共存，否则输入不了左括号**
 
 ## 12.Jedi 插件
 
 Python智能补全插件
+
 **警告：禁止和Jedi共存，否则输入不了左括号**
 
 ## 12.Theme-Soda 主题
