@@ -1,427 +1,271 @@
-# ArchLinux安装
+# ArchLinux安装KDE桌面
 
-### 1.验证启动模式
-
-验证是否为UEFI模式启动，否则就是BIOS模式启动
+### 1.更新系统
 
 ```bash
-ls /sys/firmware/efi/efivars
+pacman -Syyu
 ```
 
-### 2.检测网络连接
+### 2.创建新用户
 
 ```bash
-ping www.baidu.com -c3 # Ping百度3次后自动退出
+useradd -m -g users -G whell -s /bin/bash yuxiang # 创建用户yuxiang
 ```
 
-也可以按下<kbd>Ctrl</kbd>+<kbd>C</kbd>退出Ping
-
-***
-
-#### 附：无线网络连接
+设置密码：
 
 ```bash
-iwctl # 进入iwctl
+passwd yuxiang # 给用户yuxiang设置密码
 ```
 
-进入后：
+### 3.编辑新用户权限
 
 ```bash
-device list # 看看你的网卡叫什么名字
+EDITOR=vim visudo
 ```
+
+按下<kbd>/</kbd>搜索`yuxiang`，然后<kbd>Enter</kbd>
+
+定位到`# %wheel ALL=(ALL) ALL`，在前面按**2**次<kbd>X</kbd>删除注释
+
+按<kbd>Esc</kbd>输入`:wq`退出Vim
+
+### 4.安装KDE桌面环境
 
 ```bash
-station wlan0 scan # wlan0是无线网卡名
+pacman -S plasma-meta konsole dolphin bash-completion
 ```
+
+按**2**次<kbd>Enter</kbd>安装
+
+将SDDM设置为开机自启
 
 ```bash
-station wlan0 get-networks # 查看已被扫描的无线网络
+systemctl enable sddm
 ```
+
+开启32位支持库以及ArchLinuxCN支持库
 
 ```bash
-station wlan0 connect CMCC # wlan0是无线网卡名，CMCC是网络名
+sudo vim /etc/pacman.conf
 ```
 
-接下来输入密码后就连接成功了，输入`exit`退出
+按下<kbd>Shift</kbd>+<kbd>G</kbd>到达文档末
 
-如果还不能联网输入下面的命令试试：
+光标网上，定位到一下行，然后删除前面的`#`号注释
 
 ```bash
-systemctl start dhcpcd # 输入这个再输入ping试试
+[multilib]
+Include = /etc/pacman.d/mirrorlist
 ```
 
-### 3.更新系统时间
-
-同步系统时间：
+再把下面的一些注释去掉
 
 ```bash
-timedatectl set-ntp true
+[custom]
+SigLevel = Optional TrustAll
+Server = file:///home/custompkgs
 ```
 
-可以使用 `timedatectl status` 检查服务状态
-
-### 4.更换镜像源
-
-使用Vim编辑：
+再把`[custom]`改成`[archlinuxcn]`，并更换为中科大的源
 
 ```bash
-vim /etc/pacman.d/mirrorlist
+[archlinuxcn]
+SigLevel = Optional TrustAll
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 ```
 
-1. 按下<kbd>/</kbd>，输入`ustc`，按下<kbd>Enter</kbd>，定位到：
+按下<kbd>Esc</kbd>输入`:wq`保存退出
 
-   `Server=http://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch`
-
-2. 按**2**次<kbd>D</kbd>键，剪切镜像源
-
-3. 按**2**次<kbd>G</kbd>，返回文件最上面
-
-4. 在最上面选择一个位置按<kbd>P</kbd>即可粘贴
-
-5. 按<kbd>Esc</kbd>，再输入`:wq`退出Vim
-
-### 5.设置磁盘类型
-
-可以先使用`lsblk`来查看当前磁盘状况
-
-使用`parted`命令来对磁盘进行操作：
+退出后再更新一下新添加的内容
 
 ```bash
-parted /dev/sda # /dev/sda是要操作的磁盘
+pacman -Syyu
 ```
 
-进去后，输入：
+好了，输入`reboot`重启！
+
+### 5.进入桌面的配置
+
+进入桌面后，打开`Konsole`终端进行操作
+
+安装必要插件：
+
+* 安装ntfs-3g：
+
+  ```bash
+  sudo pacman -S ntfs-3g
+  ```
+
+* 安装Adobe开源字体
+
+  ```bash
+  sudo pacman -S adobe-source-han-serif-cn-fonts wqy-zenhei
+  ```
+
+* 安装Google开源字体
+
+  ```bash
+  sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
+  ```
+
+* 安装Chrome
+
+  ```bash
+  sudo pacman -S Chrome
+  ```
+
+* 安装yay源
+
+  ```bash
+  sudo pacman -S archlinuxcn-keyring
+  ```
+
+  ```bash
+  sudo pacman -S yay
+  ```
+
+将系统设置为中文
+
+在启动菜单上找到`System Settings`并启动，点击`Regional Settings`，在`Language`一栏点击`Add languages...`按钮，拉到下面找到`简体中文`，点击后点`Add`，把它拉到最上面，点击`Apply`按钮，完成，`Log out`重新登录即可看到效果
+
+### 6.配置中文输入法
+
+安装fcitx输入法
 
 ```bash
-mktable
+sudo pacman -S fcitx5-im
 ```
 
-它问你要什么类型的磁盘？输入`gpt`
-
-操作完成后输入`quit`退出
-
-### 6.磁盘分区
-
-进入分区操作界面：
+安装fcitx提供的中文输入包
 
 ```bash
-cfdisk /dev/sda
+sudo pacman -S fcitx5-chinese-addons
 ```
 
-按下<kbd>Enter</kbd>，进入分区操作界面
-
-* 这是UEFI启动的分区的一个例子：
-
-  | Device    | Size | Size Type        |
-  | --------- | ---- | ---------------- |
-  | /dev/sda1 | 300M | EFI System       |
-  | /dev/sda2 | 2G   | Linux swap       |
-  | /dev/sda3 | 25G  | Linux filesystem |
-  | /dev/sda4 | 60G  | Linux filesystem |
-
-* 这是BIOS启动的分区的一个例子：
-
-  不建议给`/boot`目录分区，因为ArchLinux是采用滚动更新政策，所以`/boot`目录会越用越大，万一挤满了，内核就无法安装，引发问题，上面的`EFI System`分区和下面的`BIOS boot`分区不是`/boot`分区！不要搞混了！
-  
-  | Device    | Size | Size Type        |
-  | --------- | ---- | ---------------- |
-  | /dev/sda1 | 1M   | BIOS boot        |
-  | /dev/sda2 | 2G   | Linux swap       |
-  | /dev/sda3 | 25G  | Linux filesystem |
-  | /dev/sda4 | 60G  | Linux filesystem |
-
-设置完成后，将光标移动到`Write`下，按下<kbd>Enter</kbd>，然后输入`yes`
-
-将光标移动到`quit`下退出
-
-可以输入`fdisk -l`查看磁盘分区情况
-
-### 7.格式化磁盘
-
-#### 给UEFI
-
-格式化根目录分区：
+安装主题皮肤
 
 ```bash
-mkfs.ext4 /dev/sda3 # 将sda3（也就是根目录）格式化成ext4类型
+sudo pacman -S fcitx5-material-color
 ```
 
-格式化家目录分区：
+配置：进入`系统设置`，单击`区域设置`，单击`输入法`，单击`运行 Fcitx`，点击`添加输入法...`，在列表框中找到`Pinyin`并点击`添加`，再点一下`pinyin`旁边的`配置`按钮，勾选`在程序中显示预编辑文本`、勾选`启用云拼音`，返回输入法配置页面
+
+单击`配置附加组件...`，在“界面”列表中找到`Classic User Interface`，点击它旁边的设置图标按钮，在主题下拉列表中选择`Material-Color-Blue`（根据个人喜好）
+
+设置环境变量，让其它程序也能使用这个中文输入法
 
 ```bash
-mkfs.ext4 /dev/sda4 # 将sda4（也就是家目录）格式化成ext4类型
+vim ~/.pam_environment
 ```
 
-格式化EFI分区：
+输入：
 
 ```bash
-mkfs.vfat /dev/sda1 # 将sda1（也就是EFI分区）格式化成vfat类型
+INPUT_METHOD DEFAULT=fcitx5
+GTK_IM_NODULE DEFAULT=fcitx5
+QT_IM_MODULE DEFAULT=fcitx5
+XMODIFIERS DEFAULT=\@im=fcitx5
 ```
 
-格式化swap分区：
+按下<kbd>Esc</kbd>输入`:wq`保存退出
+
+接下来设置输入法开机启动：
+
+点开启动菜单的`系统设置`，点击`开机和关机`，找到`自动启动`，点击`添加程序`，输入`fcitx`，单击`fcitx 5`后单击确定退出，完成，`Log out`重新登录即可看到效果
+
+好了，按下<kbd>Ctrl</kbd>+<kbd>空格</kbd>来切换输入法
+
+### 4.安装显卡驱动
+
+#### Intel核心显卡
 
 ```bash
-mkswap -f /dev/sda2 # 将sda2（也就是swap分区）格式化成swap类型
+sudo pacman -S xf86-video-intel mesa 1ib32-mesa vulkan-intel lib32-vulkan-intel
 ```
+
+#### NVIDIA核心显卡
 
 ```bash
-swapon /dev/sda2 # 启动swap
+sudo pacman -S nvidia nvidia-settings nvidia-utils 1ib32-nvidia-utils opencl-nvidia 1ib32-opencl-nvidia
 ```
 
-#### 给BIOS
-
-将根目录格式化为ext4：
+如果是GeForce630以下到GeForce400系列的老卡，上述包除了不要安装`nvidia`，其余照样安装，并且安装`nvidia-390xx-dkms`（AUR）及其32位支持包
 
 ```bash
-mkfs.ext4 /dev/sda3 # 将sda3（也就是根目录）格式化成ext4类型
+yay -S nvidia-390xx-dkms nvidia-390xx-utils 1ib32-nvidia-390xx-utils
 ```
 
-格式化家目录分区：
+再老的显卡直接使用开源驱动即可：
 
 ```bash
-mkfs.ext4 /dev/sda4 # 将sda4（也就是家目录）格式化成ext4类型
+sudo pacman -S mesa 1ib32-mesa xf86-video-nouveau
 ```
 
-格式化swap分区：
+若为Intel核显+Nvidia独显的笔记本，除上述的包，安装`optimus-manager`，可以在核心显卡和独立显卡间轻松切换
 
 ```bash
-mkswap -f /dev/sda2 # 将sda2（也就是swap分区）格式化成swap类型
+yay -S optimus-manager optimus-manager-qt
 ```
+
+在你切换显卡模式**前**需要进行的配置：
+
+* I卡N卡的modeset选项都去掉勾选
+* 切换到英特尔核显模式前，需要选择intel，不要选modesettings模式，否则会黑屏+混成不能开启
+* hybird模式中添加的三个环境变量，在切换到其他模式之前一定要去掉，否则会黑屏，切换不到intel
+
+### 5.KDE桌面美化
+
+> **原则：**美化不应该付出大量的时间折腾，既没有实际用处，也没有意义。花最少的时间完成性价比最高的美化才是最好的
+
+下载代理管理器
 
 ```bash
-swapon /dev/sda2 # 启动swap
+sudo pacman -S proxychains-ng
 ```
 
-### 8.挂载磁盘
-
-#### 给UEFI
-
-挂载根目录：
+编辑文件
 
 ```bash
-mount /dev/sda3 /mnt
+sudo vim /etc/proxychains.conf
 ```
 
-挂载家目录：
+把光标拖到文档末，找到`ProxyList`，在文档末添加：
+
+（将socks4 127.0.0.1 9050改为下面的端口）
 
 ```bash
-mkdir /mnt/home # 创建家目录
-mount /dev/sda4 /mnt/home # 挂载home目录
+socks5 127.0.0.1 1080
 ```
 
-挂载EFI分区：
+按下<kbd>Esc</kbd>输入`:wq`保存退出
+
+通过代理打开代理
 
 ```bash
-mkdir /mnt/boot # 创建boot目录
-mkdir /mnt/boot/EFI # 创建EFI目录
-mount /dev/sda1 /mnt/boot/EFI # 挂载EFI目录
+proxychains systemsettings5 #通过代理打开系统设置
 ```
 
-#### 给BIOS
+`系统设置>全局主题>获取新的全局主题`搜索`layan`，进行设置即可
 
-挂载根目录：
+设置壁纸可以在桌面右键鼠标菜单进行壁纸设置
+
+设置系统图标：`系统设置>图标>图标>获取新图标主题`，搜索`Tela-icon-theme`即可进行设置
+
+设置SDDM（登录界面）主题：`系统设置>开机和关机>登录屏幕（SDDM）>获取新登录屏幕`设置`layan`即可
+
+任务栏插件：网速显示组件`Netspeed widget`强烈建议安装，很实用
+
+混成器（毛玻璃效果）：`系统设置>显示和监控>混成器`，选择平滑，选择OpenGL2.0
+
+终端样式设置：打开konsole，`设置>编辑当前方案>外观`，选择`Red-Black`应用确认即可
+
+安装Latte Dock
 
 ```bash
-mount /dev/sda3 /mnt
+sudo pacman -S latte-dock
 ```
 
-挂载家目录：
+动态壁纸可以选择`Smart Video Wallpaper`插件
 
-```bash
-mkdir /mnt/home # 创建home目录
-mount /dev/sda4 /mnt/home # 挂载home目录
-```
-
-### 9.安装ArchLinux
-
-安装必备的软件包：
-
-```bash
-pacstrap /mnt base linux linux-firmware
-```
-
-安装功能性软件：
-
-```bash
-pacstrap /mnt dhcpcd iwd vim sudo
-```
-
-### 10.配置ArchLinux
-
-生成fstab文件：
-
-```bash
-genfstab -U /mnt >> /mnt/etc/fstab
-```
-
-**强烈建议**使用`cat /mnt/etc/fstab`检查一下文件是否正确
-
-进入新系统：
-
-```bash
-arch-chroot /mnt
-```
-
-设置时区：
-
-```bash
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-```
-
-同步硬件时钟：
-
-```bash
-hwclock --systohc
-```
-
-编辑`/etc/locale.gen`设置本地地址：
-
-```bash
-vim /etc/locale.gen
-```
-
-设置步骤：
-
-1. 按下<kbd>/</kbd>输入`en_US`回车，再按<kbd>N</kbd>键查找下一个目标，直到找到
-
-   `#en_US.UTF-8 UTF-8`，光标移动到`#`下面，按下<kbd>x</kbd>键把注释去掉
-
-2. 操作完后按下<kbd>Esc</kbd>后输入`:wq`保存并退出Vim
-
-接着执行以下命令生成Locale信息：
-
-```bash
-locale-gen
-```
-
-接着往`locale.conf`输入一些内容：
-
-```bash
-echo 'LANG=en_US.UTF-8' > /etc/locale.conf
-```
-
-**强烈建议**使用`cat /etc/locale.conf`检查一下文件是否正确
-
-设置主机名：
-
-```bash
-echo yuxiang-PC > /etc/hostname
-```
-
-接着向`/etc/hosts`文件添加以下内容：
-
-```bash
-vim /etc/hosts
-```
-
-```bash
-127.0.0.1	localhost
-::1		localhost
-127.0.1.1	yuxiang-PC.localdomain	yuxiang-PC # 主机名.本地域名 主机名
-```
-
-空出来的部分是<kbd>Tab</kbd>！！
-
-设置Root用户密码：
-
-```bash
-passwd root
-```
-
-安装微码：
-
-```bash
-pacman -S intel-ucode # Intel的CPU
-```
-
-```bash
-pacman -S amd-ucode # AMD的CPU
-```
-
-### 11.安装引导程序
-
-> **警告：** 这是安装的最后但也至关重要的一步，请按上述指引正确安装好引导加载程序后再重新启动。否则将无法正常进入系统
-
-#### 给UEFI
-
-安装必备的包：
-
-```bash
-pacman -S grub efibootmgr
-```
-
-给UEFI系统安装Grub：
-
-```bash
-grub-install --target=x86_64-efi --efi-directory=/boot/EFI --bootloader-id=GRUB
-```
-
-生成配置文件：
-
-```bash
-grub-mkconfig -o /boot/grub/grub.cfg
-```
-
-#### 给BIOS
-
-安装必备包：
-
-```bash
-pacman -S grub
-```
-
-给BIOS系统安装Grub：
-
-```bash
-grub-install --target=i386-pc --recheck /dev/sda # /dev/sda是要装的磁盘
-```
-
-其中 `/dev/sda` 是要安装 GRUB 的磁盘，而 **不是** 分区 `/dev/sda1`
-
-生成配置文件：
-
-```bash
-grub-mkconfig -o /boot/grub/grub.cfg
-```
-
-***
-
-完毕，输入`exit`退回安装环境
-
-使用`umount -R /mnt`卸载分区
-
-输入`reboot`重启！**重启后要拔掉U盘！**
-
-### 12.给新系统设置网络
-
-登录Root账户进入系统后，输入：
-
-```bash
-systemctl enable dhcpcd # 设置开机自启
-```
-
-现在立刻启动dhcpcd：
-
-```bash
-systemctl shart dhcpcd # 立即启动！
-```
-
-稍等几秒后，使用`ping`检测网络：
-
-```bash
-ping www.baidu.com -c3 # Ping百度3次后自动退出
-```
-
-也可以按下<kbd>Ctrl</kbd>+<kbd>C</kbd>退出Ping
-
-#### 附：命令行查看系统信息
-
-可以安装`neofetch`这个软件包来通过命令行查看系统信息：
-
-```bash
-pacman -S neofetch
-```
-
-```bash
-neofetch # 查看系统信息
-```
+接下来的一些好玩的配置就等着你自己探索了，加油吧:-)
