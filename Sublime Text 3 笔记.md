@@ -23,21 +23,7 @@
 }
 ```
 
-## 2.新建一个环境
-
-请点击菜单“Tools > Build System > New Build System”
-
-```css
-{
-    "cmd": ["Your File Location/python.exe","-u","$file"],
-    "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
-    "selector": "source.python",
-}
-```
-
-保存，然后选择该文件即可
-
-## 3.文件模板
+## 2.文件模板
 
 你必须按住sublimeTepl。
 
@@ -61,21 +47,21 @@
 
 对了，相应的模板在`C:\Users\ usersName\AppData\Roaming\Sublime Text 3\Packages\SublimeTmpl\templates`下。
 
-## 4.ConvertToUTF8 插件
+## 3.ConvertToUTF8 插件
 
 ConvertToUTF8 能将除UTF8编码之外的其他编码文件在 Sublime Text 中转换成UTF8编码
 
-## 5.BracketHighlighter 插件
+## 4.BracketHighlighter 插件
 
 高亮显示匹配的括号、引号和标签
 
-## 6.ColorHighlighter 插件
+## 5.ColorHighlighter 插件
 
 显示所选颜色值的颜色，并集成了ColorPicker
 
 在16进制的颜色值上点右键，选择“Choose color”,会弹出颜色拾色器，在需要的色块上单击。
 
-## 7.AutoPep8 插件
+## 6.AutoPep8 插件
 
 自动将 Python 代码按 PEP8 规范格式化，安装完添加如下配置可自动在保存文件的时候格式化：
 
@@ -85,25 +71,25 @@ ConvertToUTF8 能将除UTF8编码之外的其他编码文件在 Sublime Text 中
 }
 ```
 
-## 8.AutoFileName 插件
+## 7.AutoFileName 插件
 
 自动补全文件(目录)名
 
-## 9.SublimeREPL 插件
+## 8.SublimeREPL 插件
 
 Python控制台，通过选项Tools->SublimeREPL->Python就可以看到效果了
 
-## 10.SideBarEnhancements 插件
+## 9.SideBarEnhancements 插件
 
 侧栏菜单扩充功能
 
-## 11.Anaconda 插件
+## 10.Anaconda 插件
 
 代码分析平台，用于代码规范检查
 
 **警告：禁止和Jedi共存，否则输入不了左括号**
 
-## 12.Jedi 插件
+## 11.Jedi 插件
 
 Python智能补全插件
 
@@ -246,7 +232,7 @@ F6 单词检测拼写
 ```
 Ctrl+F 打开底部搜索框，查找关键字。
 Ctrl+shift+F 在文件夹内查找，与普通编辑器不同的地方是sublime允许添加多个文件夹进行查找，略高端，未研究。
-Ctrl+P 打开搜索框。举个栗子：1、输入当前项目中的文件名，快速搜索文件，2、输入@和关键字，查找文件中函数名，3、输入：和数字，跳转到文件中该行代码，4、输入#和关键字，查找变量名。
+Ctrl+P 打开搜索框。例如：1、输入当前项目中的文件名，快速搜索文件，2、输入@和关键字，查找文件中函数名，3、输入：和数字，跳转到文件中该行代码，4、输入#和关键字，查找变量名。
 Ctrl+G 打开搜索框，自动带：，输入数字跳转到该行代码。举个栗子：在页面代码比较长的文件中快速定位。
 Ctrl+R 打开搜索框，自动带@，输入关键字，查找文件中的函数名。举个栗子：在函数较多的页面快速查找某个函数。
 Ctrl+： 打开搜索框，自动带#，输入关键字，查找文件中的变量名、属性名等。
