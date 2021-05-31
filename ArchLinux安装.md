@@ -1,5 +1,7 @@
 # ArchLinux安装
 
+[toc]
+
 ### 1.验证启动模式
 
 验证是否为UEFI模式启动，否则就是BIOS模式启动
@@ -121,9 +123,11 @@ cfdisk /dev/sda
 
 * 这是BIOS启动的分区的一个例子：
 
+  不建议给`/boot`目录分区，因为ArchLinux是采用滚动更新政策，所以`/boot`目录会越用越大，万一挤满了，内核就无法安装，引发问题，上面的`EFI System`分区和下面的`BIOS boot`分区不是`/boot`分区！不要搞混了！
+  
   | Device    | Size | Size Type        |
   | --------- | ---- | ---------------- |
-  | /dev/sda1 | 300M | BIOS boot        |
+  | /dev/sda1 | 1M   | BIOS boot        |
   | /dev/sda2 | 2G   | Linux swap       |
   | /dev/sda3 | 25G  | Linux filesystem |
   | /dev/sda4 | 60G  | Linux filesystem |
@@ -159,11 +163,11 @@ mkfs.vfat /dev/sda1 # 将sda1（也就是EFI分区）格式化成vfat类型
 格式化swap分区：
 
 ```bash
-mkswap -f /dev/sda2 # 将sda2（也就是sqap分区）格式化成swap类型
+mkswap -f /dev/sda2 # 将sda2（也就是swap分区）格式化成swap类型
 ```
 
 ```bash
-swapon /dev/sda2 # 启动sqap
+swapon /dev/sda2 # 启动swap
 ```
 
 #### 给BIOS
@@ -180,23 +184,19 @@ mkfs.ext4 /dev/sda3 # 将sda3（也就是根目录）格式化成ext4类型
 mkfs.ext4 /dev/sda4 # 将sda4（也就是家目录）格式化成ext4类型
 ```
 
-将BIOS分区格式化为ext2：
-
-```bash
-mkfs.ext2 /dev/sda1 # 将sda1（也就是BIOS分区）格式化成ext2类型
-```
-
 格式化swap分区：
 
 ```bash
-mkswap -f /dev/sda2 # 将sda2（也就是sqap分区）格式化成swap类型
+mkswap -f /dev/sda2 # 将sda2（也就是swap分区）格式化成swap类型
 ```
 
 ```bash
-swapon /dev/sda2 # 启动sqap
+swapon /dev/sda2 # 启动swap
 ```
 
 ### 8.挂载磁盘
+
+#### 给UEFI
 
 挂载根目录：
 
@@ -211,7 +211,7 @@ mkdir /mnt/home # 创建家目录
 mount /dev/sda4 /mnt/home # 挂载home目录
 ```
 
-* 挂载EFI分区：
+挂载EFI分区：
 
 ```bash
 mkdir /mnt/boot # 创建boot目录
@@ -219,11 +219,19 @@ mkdir /mnt/boot/EFI # 创建EFI目录
 mount /dev/sda1 /mnt/boot/EFI # 挂载EFI目录
 ```
 
-* 挂载BIOS分区：
+#### 给BIOS
+
+挂载根目录：
 
 ```bash
-mkdir /mnt/boot # 创建boot目录
-mount /dev/sda1 /mnt/boot # 挂载BIOS目录
+mount /dev/sda3 /mnt
+```
+
+挂载家目录：
+
+```bash
+mkdir /mnt/home # 创建home目录
+mount /dev/sda4 /mnt/home # 挂载home目录
 ```
 
 ### 9.安装ArchLinux
@@ -314,6 +322,8 @@ vim /etc/hosts
 127.0.1.1	YuXiang-PC.localdomain	YuXiang-PC # 主机名.本地域名 主机名
 ```
 
+空出来的部分是<kbd>Tab</kbd>！！
+
 设置Root用户密码：
 
 ```bash
@@ -365,10 +375,10 @@ pacman -S grub
 给BIOS系统安装Grub：
 
 ```bash
-grub-install --target=i386-pc --recheck /dev/sdX # /dev/sdX是要装的磁盘
+grub-install --target=i386-pc --recheck /dev/sda # /dev/sda是要装的磁盘
 ```
 
-其中 `/dev/sdX` 是要安装 GRUB 的磁盘，比如磁盘 `/dev/sda`，而 **不是** 分区 `/dev/sda1`
+其中 `/dev/sda` 是要安装 GRUB 的磁盘，而 **不是** 分区 `/dev/sda1`
 
 生成配置文件：
 
