@@ -1,4 +1,4 @@
-# ArchLinux安装KDE桌面
+# ArchLinux安装与配置KDE桌面
 
 ### 1.更新系统
 
@@ -260,12 +260,68 @@ proxychains systemsettings5 #通过代理打开系统设置
 
 终端样式设置：打开konsole，`设置>编辑当前方案>外观`，选择`Red-Black`应用确认即可
 
-安装Latte Dock
+安装Latte Dock插件
 
 ```bash
 sudo pacman -S latte-dock
 ```
 
+安装Simple System Monitor插件：右键点击桌面空白部分→`添加部件`→搜索 Simple System Monitor→`安装`
+
 动态壁纸可以选择`Smart Video Wallpaper`插件
 
+这里列一下Arch Linux常用软件列表：
+
+| 软件名               | 描述                     |
+| -------------------- | ------------------------ |
+| FlameShot            | 火焰截图                 |
+| Motrix               | 下载工具，支持百度网盘   |
+| Audious              | 音乐播放器               |
+| VLC                  | 媒体播放器               |
+| Chrome               | 浏览器                   |
+| WPS                  | 代替Office               |
+| SimpleScreenRecorder | 录屏                     |
+| Sublime Text         | 文本编辑器               |
+| Typora               | Markdown编辑工具         |
+| KDE Connect          | Linux+Android强大交互    |
+| XMind                | 思维导图                 |
+| QQ for Linux         | 腾讯万年不更新的Linux QQ |
+| GIMP                 | 类似Ps                   |
+| shotcut              | 类似Pr                   |
+| BleachBit            | 清理工具                 |
+| XDM                  | 类似IDM下载工具          |
+
+一些通过Wine运行的Windows软件安装方法：
+
+QQ：
+
+```bash
+sudo pacman -S com.qq.im.deepin
+```
+
+TIM：
+
+```bash
+sudo pacman -S deepin.com.qq.office
+```
+
+QQ轻聊版：
+
+```bash
+sudo pacman -S deepin.com.qq.im.light
+```
+
+微信：
+
+```bash
+sudo pacman -S com.qq.weixin.deepin
+```
+
+请给他们点个赞：
+
+**deepin：**deepin-wine环境及其应用容器包含了deepin公司的大量心血。安装只需一瞬间，开发却可能是寒来暑往、披星戴月、夜以继日的奋斗才能搞定。请自觉用各种方式支持deepin，不止是物质上的，更是精神上的
+
+**wszqkzqk同学：**这里是他的[github](https://github.com/wszqkzqk)库和[码云](https://gitee.com/wszqkzqk/)库。他还未成年，对deepin产品一腔热忱。一放暑假，就搞定了Ubuntu的一键deepin wine qq包。没有他的移植工作，我在manjaro系统里可能就用不上稳定好用的TIM/QQ
+
 接下来的一些好玩的配置就等着你自己探索了，加油吧:-)
+
