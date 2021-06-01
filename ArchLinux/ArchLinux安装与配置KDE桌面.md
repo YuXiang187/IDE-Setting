@@ -83,6 +83,10 @@ sudo pacman -S archlinuxcn-keyring
 ```
 
 ```bash
+sudo pacman -S git base-devel
+```
+
+```bash
 pacman -Syyu
 ```
 
@@ -211,10 +215,6 @@ yay -S optimus-manager optimus-manager-qt
 > 原则：美化不应该付出大量的时间折腾，既没有实际用处，也没有意义。花最少的时间完成性价比最高的美化才是最好的
 
 安装yay源
-
-```bash
-pacman -S --needed git base-devel
-```
 
 ```bash
 sudo pacman -S yay-git
