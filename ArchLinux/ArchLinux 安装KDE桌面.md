@@ -9,7 +9,7 @@ pacman -Syyu
 ### 2.创建新用户
 
 ```bash
-useradd -m -g users -G whell -s /bin/bash yuxiang # 创建用户yuxiang
+useradd -m -g users -G wheel -s /bin/bash yuxiang # 创建用户yuxiang
 ```
 
 设置密码：
@@ -24,9 +24,9 @@ passwd yuxiang # 给用户yuxiang设置密码
 EDITOR=vim visudo
 ```
 
-按下<kbd>/</kbd>搜索`yuxiang`，然后<kbd>Enter</kbd>
+按下<kbd>/</kbd>搜索`wheel`，然后<kbd>Enter</kbd>
 
-定位到`# %wheel ALL=(ALL) ALL`，在前面按**2**次<kbd>X</kbd>删除注释
+定位到`# %wheel ALL=(ALL) ALL`，在`#`号下按**2**次<kbd>X</kbd>删除注释
 
 按<kbd>Esc</kbd>输入`:wq`退出Vim
 
@@ -52,14 +52,14 @@ sudo vim /etc/pacman.conf
 
 按下<kbd>Shift</kbd>+<kbd>G</kbd>到达文档末
 
-光标网上，定位到一下行，然后删除前面的`#`号注释
+光标网上，定位到一下行，然后删除下面文字前面的`#`号注释
 
 ```bash
 [multilib]
 Include = /etc/pacman.d/mirrorlist
 ```
 
-再把下面的一些注释去掉
+再把下面文字的注释去掉
 
 ```bash
 [custom]
@@ -97,13 +97,11 @@ pacman -Syyu
   sudo pacman -S ntfs-3g
   ```
 
-* 安装Adobe开源字体
+* 安装开源字体
 
   ```bash
   sudo pacman -S adobe-source-han-serif-cn-fonts wqy-zenhei
   ```
-
-* 安装Google开源字体
 
   ```bash
   sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
@@ -112,14 +110,14 @@ pacman -Syyu
 * 安装Chrome
 
   ```bash
+  sudo pacman -S archlinuxcn-keyring
+  ```
+
+  ```bash
   sudo pacman -S Chrome
   ```
 
 * 安装yay源
-
-  ```bash
-  sudo pacman -S archlinuxcn-keyring
-  ```
 
   ```bash
   sudo pacman -S yay
@@ -163,7 +161,7 @@ vim ~/.pam_environment
 
 ```bash
 INPUT_METHOD DEFAULT=fcitx5
-GTK_IM_NODULE DEFAULT=fcitx5
+GTK_IM_MODULE DEFAULT=fcitx5
 QT_IM_MODULE DEFAULT=fcitx5
 XMODIFIERS DEFAULT=\@im=fcitx5
 ```
@@ -181,25 +179,25 @@ XMODIFIERS DEFAULT=\@im=fcitx5
 #### Intel核心显卡
 
 ```bash
-sudo pacman -S xf86-video-intel mesa 1ib32-mesa vulkan-intel lib32-vulkan-intel
+sudo pacman -S xf86-video-intel mesa lib32-mesa vulkan-intel lib32-vulkan-intel
 ```
 
 #### NVIDIA核心显卡
 
 ```bash
-sudo pacman -S nvidia nvidia-settings nvidia-utils 1ib32-nvidia-utils opencl-nvidia 1ib32-opencl-nvidia
+sudo pacman -S nvidia nvidia-settings nvidia-utils lib32-nvidia-utils opencl-nvidia lib32-opencl-nvidia
 ```
 
 如果是GeForce630以下到GeForce400系列的老卡，上述包除了不要安装`nvidia`，其余照样安装，并且安装`nvidia-390xx-dkms`（AUR）及其32位支持包
 
 ```bash
-yay -S nvidia-390xx-dkms nvidia-390xx-utils 1ib32-nvidia-390xx-utils
+yay -S nvidia-390xx-dkms nvidia-390xx-utils lib32-nvidia-390xx-utils
 ```
 
 再老的显卡直接使用开源驱动即可：
 
 ```bash
-sudo pacman -S mesa 1ib32-mesa xf86-video-nouveau
+sudo pacman -S mesa lib32-mesa xf86-video-nouveau
 ```
 
 若为Intel核显+Nvidia独显的笔记本，除上述的包，安装`optimus-manager`，可以在核心显卡和独立显卡间轻松切换
@@ -319,9 +317,8 @@ sudo pacman -S com.qq.weixin.deepin
 
 请给他们点个赞：
 
-**deepin：**deepin-wine环境及其应用容器包含了deepin公司的大量心血。安装只需一瞬间，开发却可能是寒来暑往、披星戴月、夜以继日的奋斗才能搞定。请自觉用各种方式支持deepin，不止是物质上的，更是精神上的
+**Deepin：**deepin-wine环境及其应用容器包含了deepin公司的大量心血。安装只需一瞬间，开发却可能是寒来暑往、披星戴月、夜以继日的奋斗才能搞定。请自觉用各种方式支持deepin，不止是物质上的，更是精神上的
 
-**wszqkzqk同学：**这里是他的[github](https://github.com/wszqkzqk)库和[码云](https://gitee.com/wszqkzqk/)库。他还未成年，对deepin产品一腔热忱。一放暑假，就搞定了Ubuntu的一键deepin wine qq包。没有他的移植工作，我在manjaro系统里可能就用不上稳定好用的TIM/QQ
+**wszqkzqk同学：**这里是他的[Github](https://github.com/wszqkzqk)库和[码云](https://gitee.com/wszqkzqk/)库。他还未成年，对deepin产品一腔热忱。一放暑假，就搞定了Ubuntu的一键deepin wine qq包。没有他的移植工作，我在ArchLinux系统里可能就用不上稳定好用的TIM/QQ
 
-接下来的一些好玩的配置就等着你自己探索了，加油吧:-)
-
+接下来的一些好玩的配置就等着你自己探索了:-)
