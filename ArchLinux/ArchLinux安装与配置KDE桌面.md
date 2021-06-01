@@ -9,13 +9,13 @@ pacman -Syyu
 ### 2.创建新用户
 
 ```bash
-useradd -m -g users -G wheel -s /bin/bash yuxiang # 创建用户yuxiang
+useradd -m -g users -G wheel -s /bin/bash YuXiang # 创建用户YuXiang
 ```
 
 设置密码：
 
 ```bash
-passwd yuxiang # 给用户yuxiang设置密码
+passwd YuXiang # 给用户YuXiang设置密码
 ```
 
 ### 3.编辑新用户权限
@@ -261,6 +261,36 @@ proxychains systemsettings5 #通过代理打开系统设置
 混成器（毛玻璃效果）：`系统设置>显示和监控>混成器`，选择平滑，选择OpenGL2.0
 
 终端样式设置：打开konsole，`设置>编辑当前方案>外观`，选择`Red-Black`应用确认即可
+
+***
+
+离线主题设置：
+
+* /home/username/.local/share/plasma/desktoptheme
+
+  这是存放Plasma主题
+
+* /home/username/.local/share/plasma/look-and-feel
+
+  存放全局主题
+
+* /home/username/.local/share/plasma/plasmoids/
+
+  存放插件
+
+* /usr/share/sddm/themes/
+
+  这里存放SDDM的主题
+
+头像设置：
+
+找一张分辨率在`500x500`左右的PNG格式的图片，将其命名为：`.face.icon`并将它放在~/路径下然后终端执行
+
+```bash
+sudo cp ~/.face.icon/usr/share/sddm/faces/yuxiang.face.icon #注意将yuxiang替换为你的用户名
+```
+
+***
 
 安装Latte Dock插件
 
