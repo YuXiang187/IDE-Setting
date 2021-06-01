@@ -52,7 +52,7 @@ sudo vim /etc/pacman.conf
 
 按下<kbd>Shift</kbd>+<kbd>G</kbd>到达文档末
 
-光标网上，定位到一下行，然后删除下面文字前面的`#`号注释
+光标往上，定位到一下行，然后删除下面文字前面的`#`号注释
 
 ```bash
 [multilib]
@@ -113,7 +113,7 @@ pacman -Syyu
 * 安装Chrome
 
   ```bash
-  sudo pacman -S Chrome
+  sudo pacman -S google-chrome
   ```
 
 
