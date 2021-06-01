@@ -1,4 +1,4 @@
-# Typora 生成侧边栏
+# Typora生成侧边栏
 
 ## 准备工作：转HTML
 
