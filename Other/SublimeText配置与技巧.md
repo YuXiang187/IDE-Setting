@@ -1,4 +1,4 @@
-# Sublime Text 3 配置与技巧
+# SublimeText配置与技巧
 
 ## 1.设置
 
