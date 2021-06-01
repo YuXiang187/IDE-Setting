@@ -213,7 +213,11 @@ yay -S optimus-manager optimus-manager-qt
 安装yay源
 
 ```bash
-sudo pacman -S yay
+pacman -S --needed git base-devel
+```
+
+```bash
+sudo pacman -S yay-git
 ```
 
 下载代理器
@@ -294,31 +298,31 @@ sudo pacman -S latte-dock
 QQ：
 
 ```bash
-sudo pacman -S com.qq.im.deepin
+sudo yay -S com.qq.im.deepin
 ```
 
 TIM：
 
 ```bash
-sudo pacman -S deepin.com.qq.office
+sudo yay -S deepin.com.qq.office
 ```
 
 QQ轻聊版：
 
 ```bash
-sudo pacman -S deepin.com.qq.im.light
+sudo yay -S deepin.com.qq.im.light
 ```
 
 微信：
 
 ```bash
-sudo pacman -S com.qq.weixin.deepin
+sudo yay -S com.qq.weixin.deepin
 ```
 
 请给他们点个赞：
 
-**Deepin：**deepin-wine环境及其应用容器包含了deepin公司的大量心血。安装只需一瞬间，开发却可能是寒来暑往、披星戴月、夜以继日的奋斗才能搞定。请自觉用各种方式支持deepin，不止是物质上的，更是精神上的
+Deepin：deepin-wine环境及其应用容器包含了deepin公司的大量心血。安装只需一瞬间，开发却可能是寒来暑往、披星戴月、夜以继日的奋斗才能搞定。请自觉用各种方式支持deepin，不止是物质上的，更是精神上的
 
-**wszqkzqk同学：**这里是他的[Github](https://github.com/wszqkzqk)库和[码云](https://gitee.com/wszqkzqk/)库。他还未成年，对deepin产品一腔热忱。一放暑假，就搞定了Ubuntu的一键deepin wine qq包。没有他的移植工作，我在ArchLinux系统里可能就用不上稳定好用的TIM/QQ
+wszqkzqk同学：这里是他的[Github](https://github.com/wszqkzqk)库和[码云](https://gitee.com/wszqkzqk/)库。他还未成年，对deepin产品一腔热忱。一放暑假，就搞定了Ubuntu的一键deepin wine qq包。没有他的移植工作，我在ArchLinux系统里可能就用不上稳定好用的TIM/QQ
 
 接下来的一些好玩的配置就等着你自己探索了:-)
