@@ -67,17 +67,20 @@ SigLevel = Optional TrustAll
 Server = file:///home/custompkgs
 ```
 
-再把`[custom]`改成`[archlinuxcn]`，并更换为中科大的源
+再把`[custom]`改成`[archlinuxcn]`，删除`SigLevel`一行，并更换为中科大的源
 
 ```bash
 [archlinuxcn]
-SigLevel = Optional TrustAll
 Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 ```
 
 按下<kbd>Esc</kbd>输入`:wq`保存退出
 
 退出后再更新一下新添加的内容
+
+```bash
+sudo pacman -S archlinuxcn-keyring
+```
 
 ```bash
 pacman -Syyu
@@ -110,18 +113,9 @@ pacman -Syyu
 * 安装Chrome
 
   ```bash
-  sudo pacman -S archlinuxcn-keyring
-  ```
-
-  ```bash
   sudo pacman -S Chrome
   ```
 
-* 安装yay源
-
-  ```bash
-  sudo pacman -S yay
-  ```
 
 将系统设置为中文
 
@@ -216,13 +210,19 @@ yay -S optimus-manager optimus-manager-qt
 
 > **原则：**美化不应该付出大量的时间折腾，既没有实际用处，也没有意义。花最少的时间完成性价比最高的美化才是最好的
 
-下载代理管理器
+安装yay源
+
+```bash
+sudo pacman -S yay
+```
+
+下载代理器
 
 ```bash
 sudo pacman -S proxychains-ng
 ```
 
-编辑文件
+编辑代理文件
 
 ```bash
 sudo vim /etc/proxychains.conf
