@@ -228,7 +228,7 @@ sudo pacman -S proxychains-ng
 sudo vim /etc/proxychains.conf
 ```
 
-把光标拖到文档末，找到`ProxyList`，在文档末添加：
+按<kbd>Shift</kbd>+<kbd>G</kbd>把光标拖到文档末，找到`ProxyList`，在文档末添加：
 
 （将socks4 127.0.0.1 9050改为下面的端口）
 
