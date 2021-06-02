@@ -43,3 +43,21 @@ sudo pacman -S inkscape
 ```
 
 打开主题文件夹编辑svg即可
+
+### 4.Wine QQ/Wine Wechat出现中文乱码
+
+把Windows下的Font文件夹下的宋体和微软雅黑复制到/usr/share/fonts/windows目录中（没有新建）
+
+编辑配置文件：
+
+```bash
+sudo vim /opt/deepinwine/tools/run.sh 
+```
+
+然后，找到 WINE_CMD=“deepin-wine” 中间添加 “LC_ALL=zh_CN.UTF-8”
+
+```bash
+WINE_CMD="LC_ALL=zh_CN.UTF-8 deepin-wine"
+```
+
+`run_v2.sh`也作同样的修改，重启系统
