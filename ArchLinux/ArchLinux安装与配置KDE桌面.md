@@ -323,6 +323,18 @@ sudo pacman -S latte-dock
 | BleachBit            | 清理工具                 |
 | XDM                  | 类似IDM下载工具          |
 
+安装方法：
+
+```bash
+sudo pacman -S okular # 安装KDE自带PDF阅读器
+```
+
+一些软件如果用Arch官方源找不到可以用`yay`源如：
+
+```bash
+yay -S freeoffice # 安装FreeOffice
+```
+
 一些通过Wine运行的Windows软件安装方法：
 
 QQ：
