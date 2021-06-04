@@ -1,5 +1,11 @@
 # ArchLinux安装与配置KDE桌面
 
+> 下面是我在B站上学习如何安装与配置KDE桌面的笔记，B站上的链接如下：
+
+* [【收藏向②】ArchLinux安装KDE桌面&Fcitx5输入法配置](https://www.bilibili.com/video/BV1Vk4y117jc)
+* [【收藏向③】超简单Linux双显卡驱动教程/学不会来捶我/Optimus Manager](https://www.bilibili.com/video/BV1vK4y187Ww)
+* [【收藏向 ④】KDE桌面美化教程](https://www.bilibili.com/video/BV1Ua4y157Qa)
+
 ### 1.更新系统
 
 ```bash
