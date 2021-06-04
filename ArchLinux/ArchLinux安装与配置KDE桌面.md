@@ -9,13 +9,13 @@ pacman -Syyu
 ### 2.创建新用户
 
 ```bash
-useradd -m -g users -G wheel -s /bin/bash YuXiang # 创建用户YuXiang
+useradd -m -g users -G wheel -s /bin/bash yuxiang # 创建用户yuxiang
 ```
 
 设置密码：
 
 ```bash
-passwd YuXiang # 给用户YuXiang设置密码
+passwd yuxiang # 给用户yuxiang设置密码
 ```
 
 ### 3.编辑新用户权限
@@ -59,7 +59,7 @@ sudo vim /etc/pacman.conf
 Include = /etc/pacman.d/mirrorlist
 ```
 
-再把下面文字的注释去掉
+再把下面文字的注释去掉，如：
 
 ```bash
 [custom]
@@ -67,24 +67,16 @@ SigLevel = Optional TrustAll
 Server = file:///home/custompkgs
 ```
 
-再把`[custom]`改成`[archlinuxcn]`，删除`SigLevel`一行，并更换为中科大的源
+再把`[custom]`改成`[archlinuxcn]`，删除`SigLevel`一行，并更换为清华大学的源
 
 ```bash
 [archlinuxcn]
-Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 ```
 
 按下<kbd>Esc</kbd>输入`:wq`保存退出
 
 退出后再更新一下新添加的内容
-
-```bash
-sudo pacman -S archlinuxcn-keyring
-```
-
-```bash
-sudo pacman -S git base-devel
-```
 
 ```bash
 pacman -Syyu
@@ -114,8 +106,18 @@ pacman -Syyu
   sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
   ```
 
+* 安装基本环境（`yay`命令需要用到）
+
+  ```bash
+  sudo pacman -S git base-devel
+  ```
+  
 * 安装Chrome
 
+  ```bash
+  sudo pacman -S archlinuxcn-keyring
+  ```
+  
   ```bash
   sudo pacman -S google-chrome
   ```
@@ -266,19 +268,19 @@ proxychains systemsettings5 #通过代理打开系统设置
 
 离线主题设置：
 
-* /home/username/.local/share/plasma/desktoptheme
+* `/home/username/.local/share/plasma/desktoptheme`
 
   这是存放Plasma主题
 
-* /home/username/.local/share/plasma/look-and-feel
+* `/home/username/.local/share/plasma/look-and-feel`
 
   存放全局主题
 
-* /home/username/.local/share/plasma/plasmoids/
+* `/home/username/.local/share/plasma/plasmoids/`
 
   存放插件
 
-* /usr/share/sddm/themes/
+* `/usr/share/sddm/themes/`
 
   这里存放SDDM的主题
 
@@ -329,13 +331,13 @@ sudo pacman -S latte-dock
 sudo pacman -S okular # 安装KDE自带PDF阅读器
 ```
 
-一些软件如果用Arch官方源找不到可以用`yay`源如：
+一些软件如果用Arch官方源找不到可以用`yay`源，如：
 
 ```bash
 yay -S freeoffice # 安装FreeOffice
 ```
 
-一些通过Wine运行的Windows软件安装方法：
+一些通过Wine运行的Windows软件的安装方法：
 
 QQ：
 
@@ -363,7 +365,7 @@ sudo yay -S com.qq.weixin.deepin
 
 请给他们点个赞：
 
-Deepin：deepin-wine环境及其应用容器包含了deepin公司的大量心血。安装只需一瞬间，开发却可能是寒来暑往、披星戴月、夜以继日的奋斗才能搞定。请自觉用各种方式支持deepin，不止是物质上的，更是精神上的
+Deepin：deepin-wine环境及其应用容器包含了deepin公司的大量心血。安装只需一瞬间，开发却可能是寒来暑往、披星戴月、夜以继日的奋斗才能搞定。请自觉用各种方式支持deepin，不止是物质上的，更是精神上的。
 
 wszqkzqk同学：这里是他的[Github](https://github.com/wszqkzqk)库和[码云](https://gitee.com/wszqkzqk/)库。他还未成年，对deepin产品一腔热忱。一放暑假，就搞定了Ubuntu的一键deepin wine qq包。没有他的移植工作，我在ArchLinux系统里可能就用不上稳定好用的TIM/QQ
 
