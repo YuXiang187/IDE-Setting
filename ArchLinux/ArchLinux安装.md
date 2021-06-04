@@ -1,5 +1,11 @@
 # ArchLinux安装
 
+> BIOS安装Arch Linux真的是折腾死我了QAQ
+>
+> 下面的文章将基于Arch Linux的Wiki详细介绍安装过程
+>
+> 我强烈不建议新手折腾Arch Linux，如果你是新手的话，我还是推荐你去安装基于Arch Linux的[Manjaro](https://manjaro.org/)系统
+
 ### 1.验证启动模式
 
 验证是否为UEFI模式启动，否则就是BIOS模式启动
@@ -68,9 +74,7 @@ timedatectl set-ntp true
 vim /etc/pacman.d/mirrorlist
 ```
 
-1. 按下<kbd>/</kbd>，输入`ustc`，按下<kbd>Enter</kbd>，定位到：
-
-   `Server=http://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch`
+1. 按下<kbd>/</kbd>，输入`China`，按下<kbd>Enter</kbd>，定位到CN源，定位到你最喜欢的源那一行
 
 2. 按**2**次<kbd>D</kbd>键，剪切镜像源
 
