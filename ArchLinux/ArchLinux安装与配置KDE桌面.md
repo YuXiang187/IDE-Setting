@@ -188,6 +188,8 @@ XMODIFIERS DEFAULT=\@im=fcitx5
 sudo pacman -S xf86-video-intel mesa lib32-mesa vulkan-intel lib32-vulkan-intel
 ```
 
+警告：装上`xf86-video-intel`在某些机器上运行录屏软件会闪退，如果出现闪退，那就不要安装
+
 #### NVIDIA独立显卡
 
 ```bash
