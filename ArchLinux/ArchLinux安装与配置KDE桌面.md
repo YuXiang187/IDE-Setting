@@ -73,11 +73,11 @@ SigLevel = Optional TrustAll
 Server = file:///home/custompkgs
 ```
 
-再把`[custom]`改成`[archlinuxcn]`，删除`SigLevel`一行，并更换为清华大学的源
+再把`[custom]`改成`[archlinuxcn]`，删除`SigLevel`一行，并更换为中科大的源
 
 ```bash
 [archlinuxcn]
-Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 ```
 
 按下<kbd>Esc</kbd>输入`:wq`保存退出
