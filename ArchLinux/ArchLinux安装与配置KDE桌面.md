@@ -188,7 +188,7 @@ XMODIFIERS DEFAULT=\@im=fcitx5
 sudo pacman -S xf86-video-intel mesa lib32-mesa vulkan-intel lib32-vulkan-intel
 ```
 
-#### NVIDIA核心显卡
+#### NVIDIA独立显卡
 
 ```bash
 sudo pacman -S nvidia nvidia-settings nvidia-utils lib32-nvidia-utils opencl-nvidia lib32-opencl-nvidia
