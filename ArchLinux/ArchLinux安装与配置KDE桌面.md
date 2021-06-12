@@ -232,7 +232,9 @@ yay -S optimus-manager optimus-manager-qt
 sudo pacman -S yay-git
 ```
 
-### 6.安装flatpak
+### 6.使用flatpak安装软件
+
+> 使用flatpak安装软件可以解决依赖问题，如果你没有这个需求也可以不安装
 
 直接在`Konsole`下输入下面这条命令即可安装：
 
@@ -240,7 +242,7 @@ sudo pacman -S yay-git
 sudo pacman -S 
 ```
 
-可以去[Flathub](https://www.flathub.org/home)官网下载软件库引用，然后在终端用下面的命令安装：
+可以去[Flathub](https://www.flathub.org/home)官网下载软件库引用，然后在终端用下面的命令安装软件：
 
 ```bash
 sudo flatpak install packagename.flatpakref
