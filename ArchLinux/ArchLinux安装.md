@@ -68,6 +68,8 @@ timedatectl set-ntp true
 
 ### 4.更换镜像源
 
+禁用Reflector服务：`systemctl stop reflector.service`（这个服务会自动修改软件源，同时删除其他软件源）
+
 使用Vim编辑：
 
 ```bash
@@ -75,13 +77,9 @@ vim /etc/pacman.d/mirrorlist
 ```
 
 1. 按下<kbd>/</kbd>，输入`China`，按下<kbd>Enter</kbd>，定位到CN源，定位到你最喜欢的源那一行
-
 2. 按**2**次<kbd>D</kbd>键，剪切镜像源
-
 3. 按**2**次<kbd>G</kbd>，返回文件最上面
-
 4. 在最上面选择一个位置按<kbd>P</kbd>即可粘贴
-
 5. 按<kbd>Esc</kbd>，再输入`:wq`退出Vim
 
 ### 5.设置磁盘类型
@@ -126,7 +124,7 @@ cfdisk /dev/sda
 * 这是BIOS启动的分区的一个例子：
 
   不建议给`/boot`目录分区，因为ArchLinux是采用滚动更新政策，所以`/boot`目录会越用越大，万一挤满了，内核就无法安装，引发问题，上面的`EFI System`分区和下面的`BIOS boot`分区不是`/boot`分区！不要搞混了！
-  
+
   | Device    | Size | Size Type        |
   | --------- | ---- | ---------------- |
   | /dev/sda1 | 1M   | BIOS boot        |
