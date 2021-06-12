@@ -117,13 +117,13 @@ pacman -Syyu
   ```bash
   sudo pacman -S git base-devel
   ```
-  
+
 * 安装Chrome
 
   ```bash
   sudo pacman -S archlinuxcn-keyring
   ```
-  
+
   ```bash
   sudo pacman -S google-chrome
   ```
@@ -230,4 +230,24 @@ yay -S optimus-manager optimus-manager-qt
 
 ```bash
 sudo pacman -S yay-git
+```
+
+### 6.安装flatpak
+
+直接在`Konsole`下输入下面这条命令即可安装：
+
+```bash
+sudo pacman -S 
+```
+
+可以去[Flathub](https://www.flathub.org/home)官网下载软件源，然后在终端用下面的命令安装：
+
+```bash
+sudo flatpak install packagename.flatpakref
+```
+
+卸载软件，如卸载WPS：
+
+```bash
+sudo flatpak uninstall com.wps.Office
 ```
