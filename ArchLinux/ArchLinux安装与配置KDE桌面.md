@@ -131,7 +131,11 @@ pacman -Syyu
 
 将系统设置为中文
 
-在启动菜单上找到`System Settings`并启动，点击`Regional Settings`，在`Language`一栏点击`Add languages...`按钮，拉到下面找到`简体中文`，点击后点`Add`，把它拉到最上面，点击`Apply`按钮，完成，`Log out`重新登录即可看到效果
+在启动菜单上找到`System Settings`并启动，点击`Regional Settings`，在`Language`一栏点击`Add languages...`按钮，拉到下面找到`简体中文`，点击后点`Add`，把它拉到最上面，点击`Apply`按钮，完成
+
+再将Windows下的字体文件`msyh.ttf`、`msyhbd.ttf`、`simhei.ttf`复制到`/usr/share/fonts/`目录下
+
+`Log out`重新登录即可看到效果
 
 ### 6.配置中文输入法
 
@@ -220,161 +224,10 @@ yay -S optimus-manager optimus-manager-qt
 * 切换到英特尔核显模式前，需要选择intel，不要选modesettings模式，否则会黑屏+混成不能开启
 * hybird模式中添加的三个环境变量，在切换到其他模式之前一定要去掉，否则会黑屏，切换不到intel
 
-### 5.KDE桌面美化
+### 5.安装yay源
 
-> 原则：美化不应该付出大量的时间折腾，既没有实际用处，也没有意义。花最少的时间完成性价比最高的美化才是最好的
-
-安装yay源
+直接在`Konsole`下输入下面这条命令即可安装：
 
 ```bash
 sudo pacman -S yay-git
 ```
-
-下载代理器
-
-```bash
-sudo pacman -S proxychains-ng
-```
-
-编辑代理文件
-
-```bash
-sudo vim /etc/proxychains.conf
-```
-
-按<kbd>Shift</kbd>+<kbd>G</kbd>把光标拖到文档末，找到`ProxyList`，在文档末添加：
-
-（将socks4 127.0.0.1 9050改为下面的端口）
-
-```bash
-socks5 127.0.0.1 1080
-```
-
-按下<kbd>Esc</kbd>输入`:wq`保存退出
-
-通过代理打开代理
-
-```bash
-proxychains systemsettings5 #通过代理打开系统设置
-```
-
-`系统设置>全局主题>获取新的全局主题`搜索`layan`，进行设置即可
-
-设置壁纸可以在桌面右键鼠标菜单进行壁纸设置
-
-设置系统图标：`系统设置>图标>图标>获取新图标主题`，搜索`Tela-icon-theme`即可进行设置
-
-设置SDDM（登录界面）主题：`系统设置>开机和关机>登录屏幕（SDDM）>获取新登录屏幕`设置`layan`即可
-
-任务栏插件：网速显示组件`Netspeed widget`强烈建议安装，很实用
-
-混成器（毛玻璃效果）：`系统设置>显示和监控>混成器`，选择平滑，选择OpenGL2.0
-
-终端样式设置：打开konsole，`设置>编辑当前方案>外观`，选择`Red-Black`应用确认即可
-
-***
-
-离线主题设置：
-
-* `/home/username/.local/share/plasma/desktoptheme`
-
-  这是存放Plasma主题
-
-* `/home/username/.local/share/plasma/look-and-feel`
-
-  存放全局主题
-
-* `/home/username/.local/share/plasma/plasmoids/`
-
-  存放插件
-
-* `/usr/share/sddm/themes/`
-
-  这里存放SDDM的主题
-
-头像设置：
-
-找一张分辨率在`500x500`左右的PNG格式的图片，将其命名为：`.face.icon`并将它放在~/路径下然后终端执行
-
-```bash
-sudo cp ~/.face.icon/usr/share/sddm/faces/yuxiang.face.icon #注意将yuxiang替换为你的用户名
-```
-
-***
-
-安装Latte Dock插件
-
-```bash
-sudo pacman -S latte-dock
-```
-
-安装Simple System Monitor插件：右键点击桌面空白部分→`添加部件`→搜索 Simple System Monitor→`安装`
-
-动态壁纸可以选择`Smart Video Wallpaper`插件
-
-这里列一下Arch Linux常用软件列表：
-
-| 软件名               | 描述                     |
-| -------------------- | ------------------------ |
-| FlameShot            | 火焰截图                 |
-| Motrix               | 下载工具，支持百度网盘   |
-| Audious              | 音乐播放器               |
-| VLC                  | 媒体播放器               |
-| Chrome               | 浏览器                   |
-| WPS                  | 代替Office               |
-| SimpleScreenRecorder | 录屏                     |
-| Sublime Text         | 文本编辑器               |
-| Typora               | Markdown编辑工具         |
-| KDE Connect          | Linux+Android强大交互    |
-| XMind                | 思维导图                 |
-| QQ for Linux         | 腾讯万年不更新的Linux QQ |
-| GIMP                 | 类似Ps                   |
-| shotcut              | 类似Pr                   |
-| BleachBit            | 清理工具                 |
-| XDM                  | 类似IDM下载工具          |
-
-安装方法：
-
-```bash
-sudo pacman -S okular # 安装KDE自带PDF阅读器
-```
-
-一些软件如果用Arch官方源找不到可以用`yay`源，如：
-
-```bash
-yay -S freeoffice # 安装FreeOffice
-```
-
-一些通过Wine运行的Windows软件的安装方法：
-
-QQ：
-
-```bash
-sudo yay -S com.qq.im.deepin
-```
-
-TIM：
-
-```bash
-sudo yay -S deepin.com.qq.office
-```
-
-QQ轻聊版：
-
-```bash
-sudo yay -S deepin.com.qq.im.light
-```
-
-微信：
-
-```bash
-sudo yay -S com.qq.weixin.deepin
-```
-
-请给他们点个赞：
-
-Deepin：deepin-wine环境及其应用容器包含了deepin公司的大量心血。安装只需一瞬间，开发却可能是寒来暑往、披星戴月、夜以继日的奋斗才能搞定。请自觉用各种方式支持deepin，不止是物质上的，更是精神上的。
-
-wszqkzqk同学：这里是他的[Github](https://github.com/wszqkzqk)库和[码云](https://gitee.com/wszqkzqk/)库。他还未成年，对deepin产品一腔热忱。一放暑假，就搞定了Ubuntu的一键deepin wine qq包。没有他的移植工作，我在ArchLinux系统里可能就用不上稳定好用的TIM/QQ
-
-接下来的一些好玩的配置就等着你自己探索了:-)
