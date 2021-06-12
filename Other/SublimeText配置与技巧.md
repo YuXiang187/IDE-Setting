@@ -99,6 +99,8 @@ Python智能补全插件
 
 Sublime Text 最受欢迎的主题之一，风格类似GNOME桌面
 
+单击菜单栏"Preferences" - "Package Control"，输入`Install Package`，然后输入`Theme-Soda`即可安装主题
+
 * Soda 亮色主题请添加：
 
   ```css
