@@ -68,16 +68,13 @@ Include = /etc/pacman.d/mirrorlist
 再把下面文字的注释去掉，如：
 
 ```bash
-[custom]
-SigLevel = Optional TrustAll
-Server = file:///home/custompkgs
+[custom]SigLevel = Optional TrustAllServer = file:///home/custompkgs
 ```
 
 再把`[custom]`改成`[archlinuxcn]`，删除`SigLevel`一行，并更换为中科大的源
 
 ```bash
-[archlinuxcn]
-Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+[archlinuxcn]Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 ```
 
 按下<kbd>Esc</kbd>输入`:wq`保存退出
@@ -134,6 +131,8 @@ pacman -Syyu
 在启动菜单上找到`System Settings`并启动，点击`Regional Settings`，在`Language`一栏点击`Add languages...`按钮，拉到下面找到`简体中文`，点击后点`Add`，把它拉到最上面，点击`Apply`按钮，完成
 
 再将Windows下的字体文件`msyh.ttf`、`msyhbd.ttf`、`simhei.ttf`复制到`/usr/share/fonts/`目录下
+
+创建默认目录：`xdg-user-dirs-update`
 
 `Log out`重新登录即可看到效果
 
