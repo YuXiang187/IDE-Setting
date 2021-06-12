@@ -240,7 +240,7 @@ sudo pacman -S yay-git
 sudo pacman -S 
 ```
 
-可以去[Flathub](https://www.flathub.org/home)官网下载软件源，然后在终端用下面的命令安装：
+可以去[Flathub](https://www.flathub.org/home)官网下载软件库引用，然后在终端用下面的命令安装：
 
 ```bash
 sudo flatpak install packagename.flatpakref
