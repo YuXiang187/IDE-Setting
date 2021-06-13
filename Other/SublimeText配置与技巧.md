@@ -9,6 +9,8 @@
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
 	"font_face": "Consolas",
 	"font_size": 13,
+    // 设置闪烁的光标样式
+    "caret_style": "smooth",
 	"ignored_packages":
 	[
 		"Vintage"
