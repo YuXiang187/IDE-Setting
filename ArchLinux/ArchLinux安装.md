@@ -322,16 +322,7 @@ vim /etc/hosts
 127.0.1.1	yuxiang-PC.localdomain	yuxiang-PC # 主机名.本地域名 主机名
 ```
 
-Manjaro下面的hosts文件配置：
-
-```
-# Host addresses
-127.0.0.1  localhost
-127.0.1.1  yuxiang-PC
-::1        localhost ip6-localhost ip6-loopback
-ff02::1    ip6-allnodes
-ff02::2    ip6-allrouters
-```
+如果系统有一个永久的 IP 地址，请使用这个永久的 IP 地址而不是 `127.0.1.1`
 
 空出来的部分是<kbd>Tab</kbd>！！
 
