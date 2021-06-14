@@ -38,9 +38,9 @@
 * SDDM：`Layansddm.tar.xz`
 * 图标：`Tela-blue.tar.xz`
 
-链接：https://pan.baidu.com/s/1veSwvDnWsblauRSJZlScdQ
+链接：https://pan.baidu.com/s/1QPoVK7RuQbka4_eoru2lDw
 
-提取码：hnfh
+提取码：v7y3
 
 > 桌面特效
 
@@ -63,9 +63,9 @@
 
 外观壁纸下载：
 
-链接：https://pan.baidu.com/s/1Q_bTUDalPIoO6UJSYFTLCw
+链接：https://pan.baidu.com/s/1KWXkBJK-vA6Z5Y3q0PClqg
 
-提取码：8vur
+提取码：9vx4
 
 > 快捷键
 
@@ -150,9 +150,9 @@ sudo pacman -S typora
 
 `typora-onedark-theme-v1.09.zip`、`panda.zip`：
 
-链接：https://pan.baidu.com/s/1TcFmheLhGgjxYx5eFc3Zsg
+链接：https://pan.baidu.com/s/1Q67O9dEKOkw3Tc3lPCeYTA
 
-提取码：58dq
+提取码：4uts
 
 把“发送匿名使用数据”的复选框勾掉
 
@@ -233,9 +233,9 @@ yay xmind-2020
 
 对于10.3.1-0版本提供的破解补丁：
 
-链接：https://pan.baidu.com/s/1aGosEeeOEVtawFoNKDF0eA
+链接：https://pan.baidu.com/s/1fVFxJSn0dhbK8GXgPGGsaw
 
-提取码：vqve
+提取码：3nrg
 
 ### nomacs - 图像查看
 
@@ -279,9 +279,9 @@ yay -S sublime-text-4
 
 > PSCS6的破解补丁下载：
 >
-> 链接：https://pan.baidu.com/s/1p7jb0ZROWh-ZWkqgJkF_mw
+> 链接：https://pan.baidu.com/s/1DgBNnyR67rSVZ942o_RxaQ
 >
-> 提取码：uvif
+> 提取码：fdrh
 
 * shotcut：`sudo pacman -S shotcut`
 * GIMP：`sudo pacman -S gimp`
