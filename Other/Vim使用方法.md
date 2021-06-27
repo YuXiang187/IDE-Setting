@@ -116,7 +116,7 @@ map S :w<CR> # 如果按下大写的S就保存文件
 ```
 
 * 设置代码高亮：`syntax on`
-* 开启行号：`set number`（关闭是`set nonumber `）
+* 开启行号：`set number`（关闭是`set nonumber`）
 * 开启跟随光标行号：`set relativenumber`
 * 在当前光标下显示一条线：`set cursorline`
 * 自动换行：`set wrap`
