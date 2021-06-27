@@ -27,7 +27,7 @@
 
 ## 2.文件模板
 
-你必须按住sublimeTepl。
+你必须安装sublimeTepl。
 
 请点击菜单“Preferences - Package Settings - SublimeTmpl - Settings - User”
 
@@ -137,7 +137,7 @@ Sublime Text 最受欢迎的主题之一，风格类似GNOME桌面
 ]
 ```
 
-保存后在文本区域内输入一个括号，按下<key>Enter</key>试试
+保存后在文本区域内输入一个括号，按下<kbd>Enter</kbd>试试
 
 ## 附：Sublime Text3 全部快捷键
 
@@ -214,20 +214,20 @@ Ctrl+Alt+↓ 向下添加多行光标，可同时编辑多行。
 
 ```
 Ctrl+J 合并选中的多行代码为一行。举个栗子：将多行格式的CSS属性合并为一行。
-Ctrl+Shift+D 复制光标所在整行，插入到下一行。
+Ctrl+Shift+D 复制光标所在整行，插入到下一行
 Tab 向右缩进。
-Shift+Tab 向左缩进。
-Ctrl+K+K 从光标处开始删除代码至行尾。
-Ctrl+Shift+K 删除整行。
+Shift+Tab 向左缩进
+Ctrl+K+K 从光标处开始删除代码至行尾
+Ctrl+Shift+K 删除整行
 Ctrl+/ 注释单行。
-Ctrl+Shift+/ 注释多行。
-Ctrl+K+U 转换大写。
-Ctrl+K+L 转换小写。
-Ctrl+Z 撤销。
-Ctrl+Y 恢复撤销。
-Ctrl+U 软撤销，感觉和 Ctrl+Z 一样。
+Ctrl+Shift+/ 注释多行
+Ctrl+K+U 转换大写
+Ctrl+K+L 转换小写
+Ctrl+Z 撤销
+Ctrl+Y 恢复撤销
+Ctrl+U 软撤销，感觉和 Ctrl+Z 一样
 Ctrl+F2 设置书签
-Ctrl+T 左右字母互换。
+Ctrl+T 左右字母互换
 F6 单词检测拼写
 ```
 
@@ -247,9 +247,9 @@ Esc 退出光标多行选择，退出搜索框，命令框等。
 ### 显示类
 
 ```
-Ctrl+Tab 按文件浏览过的顺序，切换当前窗口的标签页。
-Ctrl+PageDown 向左切换当前窗口的标签页。
-Ctrl+PageUp 向右切换当前窗口的标签页。
+Ctrl+Tab 按文件浏览过的顺序，切换当前窗口的标签页
+Ctrl+PageDown 向左切换当前窗口的标签页
+Ctrl+PageUp 向右切换当前窗口的标签页
 Alt+Shift+1 窗口分屏，恢复默认1屏（非小键盘的数字）
 Alt+Shift+2 左右分屏-2列
 Alt+Shift+3 左右分屏-3列
@@ -257,7 +257,7 @@ Alt+Shift+4 左右分屏-4列
 Alt+Shift+5 等分4屏
 Alt+Shift+8 垂直分屏-2屏
 Alt+Shift+9 垂直分屏-3屏
-Ctrl+K+B 开启/关闭侧边栏。
+Ctrl+K+B 开启/关闭侧边栏
 F11 全屏模式
 Shift+F11 免打扰模式
 ```
