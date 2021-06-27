@@ -1,5 +1,11 @@
 # SublimeText配置与技巧
 
+## 0.技巧
+
+* **垂直选区**：按住<kbd>鼠标中键</kbd>kbd>然后滑动鼠标即可垂直选区（<kbd>Shift</kbd>+<kbd>鼠标右键</kbd>和<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>↓</kbd>也可以）
+* **快速选中**：选中文本后按住<kbd>Alt</kbd>+<kbd>F3</kbd>快速选择指定字符
+* **自适应缩进的粘贴：**使用<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd>
+
 ## 1.设置
 
 请点击菜单“Preferences - Settings”
@@ -27,27 +33,34 @@
 
 ## 2.文件模板
 
-你必须安装sublimeTepl。
+你必须安装sublimeTepl
 
-请点击菜单“Preferences - Package Settings - SublimeTmpl - Settings - User”
+请点击菜单“Preferences - Package Settings - SublimeTmpl - Settings - User”，下面是HTML模板的一个例子：
 
 ```css
-{  
-    "disable_keymap_actions": false, // "all"; "html,css"  
-    "date_format" : "%Y-%m-%d %H:%M:%S",  
-    "attr": {  
-            "author": "YuXiang" ,
-            "email": "yuxiang187@qq.com",
-            "link": "null"
-            "software": "YuXiangSoftware",
-            "pythonVersion": "Python37"
-            } ,
-    "enable_file_variables_on_save": true, 
-    "enable_project_variables": true,
-}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+            <title>main title</title>
+            <meta name="keywords" content="search word">
+            <meta name="description" content="introduction">
+            <link rel="stylesheet" type="text/css" href="css/style.css">
+            <script type="" src="js/jquery-2.1.4.js" charset="UTF-8"></script>
+    </head>
+    <body>
+    </body>
+</html>
 ```
 
-对了，相应的模板在`C:\Users\ usersName\AppData\Roaming\Sublime Text 3\Packages\SublimeTmpl\templates`下。
+对了，相应的模板在`C:\Users\ usersName\AppData\Roaming\Sublime Text 3\Packages\SublimeTmpl\templates`下
+
+* Ctrl+Alt+H：新建 html 文件
+* Ctrl+Alt+J： 新建 javascript 文件
+* Ctrl+Alt+C： 新建 css 文件
+* Ctrl+Alt+P：新建 php 文件
+* Ctrl+Alt+R： 新建 ruby 文件
+* Ctrl+Alt+Shift+P：新建 python 文件
 
 ## 3.ConvertToUTF8 插件
 
@@ -77,27 +90,23 @@ ConvertToUTF8 能将除UTF8编码之外的其他编码文件在 Sublime Text 中
 
 自动补全文件(目录)名
 
-## 8.SublimeREPL 插件
-
-Python控制台，通过选项Tools->SublimeREPL->Python就可以看到效果了
-
-## 9.SideBarEnhancements 插件
+## 8.SideBarEnhancements 插件
 
 侧栏菜单扩充功能
 
-## 10.Anaconda 插件
+## 9.Anaconda 插件
 
 代码分析平台，用于代码规范检查
 
 **警告：禁止和Jedi共存，否则输入不了左括号**
 
-## 11.Jedi 插件
+## 10.Jedi 插件
 
 Python智能补全插件
 
 **警告：禁止和Anaconda共存，否则输入不了左括号**
 
-## 12.Theme-Soda 主题
+## 11.Theme-Soda 主题
 
 Sublime Text 最受欢迎的主题之一，风格类似GNOME桌面
 
