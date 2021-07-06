@@ -1,0 +1,2345 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <style>
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #1d1f23;
+            color: #b1b4b9;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 10px;
+        }
+
+        #myBtn:hover {
+            background-color: #555;
+        }
+
+        textarea {
+            background-color: #282c34;
+            border-style: solid;
+            resize: none;
+            outline: 0;
+        }
+
+        .popup {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            bottom: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2;
+            visibility: hidden;
+            opacity: 0;
+            overflow: hidden;
+            -webkit-transition: .64s ease-in-out;
+            transition: .64s ease-in-out;
+        }
+
+        .popup-inner {
+            position: relative;
+            bottom: -100vw;
+            right: -100vh;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            max-width: 800px;
+            max-height: 600px;
+            width: 60%;
+            height: 80%;
+            background-color: #282c34;
+            -webkit-transform: rotate(32deg);
+            transform: rotate(32deg);
+            -webkit-transition: .64s ease-in-out;
+            transition: .64s ease-in-out;
+        }
+
+        .popup_allText {
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 1rem;
+        }
+
+        .popup_text {
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            width: 50%;
+            height: 100%;
+            padding: 1rem;
+        }
+
+        .popup:target {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup:target .popup-inner {
+            bottom: 0;
+            right: 0;
+            -webkit-transform: rotate(0);
+            transform: rotate(0);
+        }
+
+        .popup__close {
+            position: absolute;
+            right: -0.5rem;
+            top: -0.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            font-size: .875rem;
+            font-weight: 300;
+            border-radius: 100%;
+            color: #282c34;
+            background-color: #b1b4b9;
+            z-index: 4;
+            line-height: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+    <style type='text/css'>html {
+        overflow-x: initial !important;
+    }
+
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --select-text-bg-color: #b5d6fc;
+        --select-text-font-color: auto;
+        --monospace: "Lucida Console", Consolas, "Courier", monospace;
+        --title-bar-height: 20px;
+    }
+
+    html {
+        font-size: 14px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        height: auto;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        font-size: 1rem;
+        line-height: 1.42857;
+        overflow-x: hidden;
+        background: inherit;
+        tab-size: 4;
+    }
+
+    iframe {
+        margin: auto;
+    }
+
+    a:active, a:hover {
+        outline: 0;
+    }
+
+    #write {
+        margin: 0 auto;
+        height: auto;
+        width: inherit;
+        word-break: normal;
+        overflow-wrap: break-word;
+        position: relative;
+        white-space: normal;
+        overflow-x: visible;
+        padding-top: 36px;
+    }
+
+    #write.first-line-indent p {
+        text-indent: 2em;
+    }
+
+    #write.first-line-indent li p, #write.first-line-indent p * {
+        text-indent: 0;
+    }
+
+    #write.first-line-indent li {
+        margin-left: 2em;
+    }
+
+    .for-image #write {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.yuxiang-export {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .yuxiang-export .task-list-item input {
+        pointer-events: none;
+    }
+
+    @media screen and (max-width: 500px) {
+        body.yuxiang-export {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        #write {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+    }
+
+    #write li > figure:last-child {
+        margin-bottom: 0.5rem;
+    }
+
+    #write ol, #write ul {
+        position: relative;
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+        image-orientation: from-image;
+    }
+
+    button, input, select, textarea {
+        color: inherit;
+        font: inherit;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        line-height: normal;
+        padding: 0;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+        width: inherit;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+        position: relative;
+    }
+
+    p {
+        line-height: inherit;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid-page;
+        break-inside: avoid;
+        orphans: 4;
+    }
+
+    p {
+        orphans: 4;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    sup.md-footnote a, sup.md-footnote a:hover {
+        color: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+    }
+
+    figure {
+        overflow-x: auto;
+        margin: 1.2em 0;
+        max-width: calc(100% + 16px);
+        padding: 0;
+    }
+
+    figure > table {
+        margin: 0;
+    }
+
+    tr {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        overflow: auto;
+        break-inside: auto;
+        text-align: left;
+    }
+
+    table.md-table td {
+        min-width: 32px;
+    }
+
+    .CodeMirror pre {
+        padding: 0 4px;
+    }
+
+    #write pre {
+        white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+        white-space: pre;
+    }
+
+    li div {
+        padding-top: 0;
+    }
+
+    blockquote {
+        margin: 1rem 0;
+    }
+
+    li blockquote {
+        margin: 1rem 0;
+    }
+
+    li {
+        margin: 0;
+        position: relative;
+    }
+
+    blockquote > :last-child {
+        margin-bottom: 0;
+    }
+
+    blockquote > :first-child, li > :first-child {
+        margin-top: 0;
+    }
+
+    @media print {
+        body, html {
+            border: 1px solid transparent;
+            height: 99%;
+            break-after: avoid;
+            break-before: avoid;
+            font-variant-ligatures: no-common-ligatures;
+        }
+
+        #write {
+            margin-top: 0;
+            padding-top: 0;
+            border-color: transparent !important;
+        }
+
+        .yuxiang-export * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        .yuxiang-export #write {
+            break-after: avoid;
+        }
+
+        .yuxiang-export #write::after {
+            height: 0;
+        }
+
+        .is-mac table {
+            break-inside: avoid;
+        }
+
+        .yuxiang-export-show-outline .yuxiang-export-sidebar {
+            display: none;
+        }
+    }
+
+    a img, img a {
+        cursor: pointer;
+    }
+
+    p > .md-image:only-child:not(.md-img-error) img, p > img:only-child {
+        display: block;
+        margin: auto;
+    }
+
+    #write.first-line-indent p > .md-image:only-child:not(.md-img-error) img {
+        left: -2em;
+        position: relative;
+    }
+
+    [contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus {
+        outline: 0;
+        box-shadow: none;
+    }
+
+    .md-task-list-item > input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-left: -1.2em;
+        margin-top: calc(1em - 10px);
+        border: none;
+    }
+
+    .md-toc-item a {
+        text-decoration: none;
+    }
+
+    @media screen and (max-width: 48em) {
+
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+        color: inherit;
+    }
+
+    code, pre, samp, tt {
+        font-family: var(--monospace);
+    }
+
+    kbd {
+        margin: 0 0.1em;
+        padding: 0.1em 0.6em;
+        font-size: 0.8em;
+        color: rgb(36, 39, 41);
+        background: rgb(255, 255, 255);
+        border: 1px solid rgb(173, 179, 185);
+        border-radius: 3px;
+        box-shadow: rgba(12, 13, 14, 0.2) 0 1px 0, rgb(255, 255, 255) 0 0 0 2px inset;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    code {
+        text-align: left;
+        vertical-align: initial;
+    }
+
+    .MathJax_SVG * {
+        transition: none 0s ease 0s;
+    }
+
+    .MathJax_SVG_Display svg {
+        vertical-align: middle !important;
+        margin-bottom: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    .md-diagram-panel > svg {
+        max-width: 100%;
+    }
+
+    [lang="flow"] svg, [lang="mermaid"] svg {
+        max-width: 100%;
+        height: auto;
+    }
+
+    [lang="mermaid"] .node text {
+        font-size: 1rem;
+    }
+
+    table tr th {
+        border-bottom: 0;
+    }
+
+    video {
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    iframe {
+        max-width: 100%;
+        width: 100%;
+        border: none;
+    }
+
+    .highlight td, .highlight tr {
+        border: 0;
+    }
+
+    mark {
+        background: rgb(255, 255, 0);
+        color: rgb(0, 0, 0);
+    }
+
+    @media print {
+        .yuxiang-export h1, .yuxiang-export h2, .yuxiang-export h3, .yuxiang-export h4, .yuxiang-export h5, .yuxiang-export h6 {
+            break-inside: avoid;
+        }
+    }
+
+    .md-diagram-panel .edgeLabel rect {
+        opacity: 1 !important;
+    }
+
+    .yuxiang-export-show-outline #write {
+        --webkit-flex: 2;
+        flex: 2 1 0;
+    }
+
+    @media screen and (max-width: 1024px) {
+    }
+
+    @media screen and (max-width: 800px) {
+    }
+
+    .outline-content li, .outline-content ul {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+        list-style: none;
+    }
+
+    .outline-content ul {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .outline-content strong {
+        font-weight: 400;
+    }
+
+
+    :root {
+        /* dark color for background*/
+        /* default color */
+        --bg-color1: hsl(220, 13%, 18%);
+        /* for most panel, context, header, etc */
+        --bg-color2: rgb(33, 37, 43);
+        /* for toc and table edit panel */
+        --bg-color3: rgba(16, 17, 20, 0.5);
+        /* for tips */
+        --bg-color4: black;
+        /* for blockquote, codeblock, input, etc */
+        --bg-color5: rgb(29, 31, 35);
+        /* light color for text and icon*/
+        /* default color */
+        --text-color1: hsl(220, 6%, 71%);
+        /* for text on panel */
+        --text-color2: rgb(220, 220, 220);
+        /* for checkbox and radio */
+        --text-color3: hsl(192, 6%, 40%);
+        /* for tips */
+        --text-color4: white;
+        /* for focus mode */
+        --text-color5: rgba(170, 178, 180, 0.5);
+        /* link color */
+        --link-color: rgb(197, 202, 210);
+        /* table color */
+        --table-border-color: rgb(100, 104, 116);
+        --table-thead-color: rgb(31, 35, 40);
+        --table-bg-color: rgb(40, 44, 52);
+        --table-bg-darker-color: rgb(35, 40, 46);
+        /* hover color */
+        /* default hover background color */
+        --hover-bg-color1: rgb(62, 66, 73);
+        /* for input item */
+        --hover-bg-color2: hsl(220, 9%, 14%);
+        /* for button on toc and table edit panel */
+        --hover-bg-color3: rgba(62, 66, 73, 0.8);
+        /* default hover text color */
+        --hover-text-color: white;
+        /* active color */
+        --active-color: var(--hover-bg-color1);
+        /* input color */
+        --input-color: rgb(29, 31, 35);
+        /* menu divider color */
+        /*   --menu-divider-color: rgb(95, 97, 101); */
+        --menu-divider-color: hsl(220, 5%, 40%);
+        /* scrollbar color */
+        --scrollbar-thumb-color: var(--menu-divider-color);
+        --scrollbar-track-color: rgba(95, 97, 101, 0.3);
+        /* theme select color */
+        --theme-select-color: rgba(255, 255, 255, 0.5);
+        --button-color: rgb(62, 66, 73);
+        --select-color: rgb(33, 37, 43);
+        /* focus color */
+        --focus-color: rgba(100, 100, 100, 0.8);
+        --focus-ring-color: var(--focus-color);
+        /* codeblock color */
+        --code-red-color: hsl(355, 65%, 65%);
+        --code-yellow-color: hsl(39, 67%, 69%);
+        --code-cyan-color: hsl(187, 47%, 55%);
+        --code-blue-color: hsl(207, 82%, 66%);
+        --code-purple-color: hsl(286, 60%, 67%);
+        --code-orange-color: hsl(29, 54%, 61%);
+        --code-green-color: hsl(95, 38%, 62%);
+        --code-grey-color: hsl(220, 9%, 55%);
+
+        --code-select-bg-color: rgb(64, 72, 89);
+        --code-cursor-color: hsl(220, 100%, 66%);
+        /* implicit selecttion text bg color */
+        --select-text-bg-color: rgb(150, 156, 170);
+        /* implicit button color */
+        --primary-color: var(--button-color);
+        --primary-btn-border-color: transparent;
+        --primary-btn-text-color: var(--text-color2);
+        /* implicit sidebar color */
+        --side-bar-bg-color: var(--bg-color2);
+        --control-text-color: var(--text-color2);
+        /* implicit text color */
+        --text-color: var(--text-color1);
+        /* implicit background color for setting menu */
+        --bg-color: var(--bg-color1);
+        /* implicit hover color */
+        --item-hover-bg-color: var(--hover-bg-color1);
+        --item-hover-text-color: var(--hover-text-color);
+        /* implicit active color */
+        /* implicit mathjax edit panel background color */
+        --rawblock-edit-panel-bd: var(--bg-color5);
+        /* implicit focus mode color */
+        --blur-text-color: var(--text-color5);
+        /* implicit search result select color */
+        --control-text-hover-color: var(--hover-text-color);
+        /* implicit active file color in sidebar file menu treeview */
+        --active-file-text-color: var(--hover-text-color);
+        --active-file-border-color: var(--hover-text-color);
+
+        --node-border: var(--menu-divider-color);
+        --node-fill: var(--bg-color2);
+    }
+
+    /* basic style */
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial,
+        sans-serif;
+        color: var(--text-color1);
+        background: var(--bg-color1);
+        line-height: 1.6;
+    }
+
+    /* link */
+    #write a:not([role="menuitem"]) {
+        color: var(--link-color) !important;
+    }
+
+    #write a:not([role="menuitem"]):hover {
+        color: var(--hover-text-color) !important;
+    }
+
+    /* h1-h6 */
+    #write h1,
+    #write h2,
+    #write h3,
+    #write h4,
+    #write h5,
+    #write h6 {
+        margin-top: 0.5em;
+        margin-bottom: 0;
+        line-height: 1em;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        padding-top: 0.3em;
+    }
+
+    #write h1 {
+        font-size: 2.5em;
+        padding-bottom: 0.5em;
+        border-bottom: 3px double var(--text-color5);
+
+    }
+
+    #write h2 {
+        font-size: 2em;
+        padding-bottom: 0.5em;
+        border-bottom: 3px double var(--text-color5);
+    }
+
+    #write h3 {
+        font-size: 1.75em;
+        padding-bottom: 0.5em;
+        border-bottom: 1px solid var(--text-color5);
+    }
+
+    #write h4 {
+        font-size: 1.55em;
+    }
+
+    #write h5 {
+        font-size: 1.35em;
+    }
+
+    #write h6 {
+        font-size: 1.2em;
+    }
+
+    /* horizontal divider */
+    hr {
+        height: 1px;
+        background-color: var(--text-color5);
+        border: 0;
+    }
+
+    /* list */
+    ul,
+    ol {
+        padding-left: 30px;
+    }
+
+    /* blockquote */
+    blockquote {
+        border-left: 4px solid var(--text-color1);
+        padding: 4px 15px;
+        color: var(--text-color1);
+        background-color: var(--bg-color5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    blockquote blockquote {
+        padding-right: 0;
+    }
+
+    /* table */
+    table thead tr {
+        background-color: var(--table-thead-color);
+    }
+
+    table tr th {
+        font-weight: bold;
+        border-left: 1px solid var(--table-border-color);
+        border-right: 1px solid var(--table-border-color);
+        text-align: left;
+        margin: 0;
+        padding: 6px 13px;
+    }
+
+    table tbody tr {
+        border-top: 1px solid var(--table-border-color);
+        margin: 0;
+        padding: 0;
+    }
+
+    table tbody tr:nth-child(2n) {
+        background-color: var(--table-bg-darker-color);
+    }
+
+    table tbody tr:nth-child(2n + 1) {
+        background-color: var(--table-bg-color);
+    }
+
+    table tr td {
+        border-left: 1px solid var(--table-border-color);
+        border-right: 1px solid var(--table-border-color);
+        text-align: left;
+        margin: 0;
+        padding: 6px 13px;
+    }
+
+    table tr th:first-child,
+    table tr td:first-child {
+        border-left-width: 0;
+    }
+
+    table tr th:last-child,
+    table tr td:last-child {
+        border-right-width: 0;
+    }
+
+    /* button on table edit panel */
+    .ty-table-edit button {
+        background-color: transparent;
+        color: var(--text-color2);
+        border: 0;
+        margin-left: 0 !important;
+    }
+
+    /* button hover on table edit panel */
+    .ty-table-edit button:hover {
+        background-color: var(--hover-bg-color3);
+        color: var(--hover-text-color);
+    }
+
+    /* grid size */
+    .md-grid-board a {
+        width: 15px;
+        height: 15px;
+    }
+
+    /* not existing thread grid */
+    .md-grid-board tr[row="1"] {
+        background-color: rgb(220, 220, 220);
+    }
+
+    /* task */
+    .md-task-list-item > input {
+        margin-left: -1.3em;
+    }
+
+    .md-inline-math script {
+        color: var(--text-color1);
+    }
+
+    .on-focus-mode #write svg {
+        opacity: 1;
+    }
+
+    /* input */
+    input {
+        background-color: var(--input-color) !important;
+        border: 0 !important;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    input[type="checkbox"]:before {
+        content: "";
+        display: inline-block;
+        width: 1.2rem;
+        height: 1.2rem;
+        vertical-align: middle;
+        text-align: center;
+        border: 0;
+        border-radius: 3px;
+        background-color: var(--input-color);
+        margin-top: -0.5rem;
+        margin-left: -0.2rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* checkbox hover */
+    input[type="checkbox"]:not([disabled]):not(:checked):hover:before {
+        content: "\2713";
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+        color: var(--text-color3);
+    }
+
+    /* checkbox checked*/
+    input[type="checkbox"]:checked:before {
+        content: "\2713";
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+        color: var(--text-color2);
+    }
+
+    /* checkbox checked hover*/
+    input[type="checkbox"]:checked:hover:before {
+        content: "\2713";
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+        color: var(--hover-text-color);
+    }
+
+    /* radio */
+    input[type="radio"]:before {
+        content: "";
+        display: inline-block;
+        width: 1.2rem;
+        height: 1.2rem;
+        vertical-align: middle;
+        text-align: center;
+        border: 0;
+        border-radius: 0.55rem;
+        background-color: var(--input-color);
+        margin-top: -0.4rem;
+        margin-left: -0.1rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* radio hover */
+    input[type="radio"]:not([disabled]):not(:checked):hover:before {
+        content: "\25CF";
+        font-size: 1rem;
+        line-height: 1rem;
+        color: var(--text-color3);
+    }
+
+    /* radio checked */
+    input[type="radio"]:checked:before {
+        content: "\25CF";
+        font-size: 1rem;
+        line-height: 1rem;
+        color: var(--text-color2);
+    }
+
+    /* radio checked hover*/
+    input[type="radio"]:checked:before {
+        content: "\25CF";
+        font-size: 1rem;
+        line-height: 1rem;
+        color: var(--hover-text-color);
+    }
+
+    /* default focus style */
+    :focus {
+        outline-color: var(--focus-color);
+    }
+
+    /* shadow for image item*/
+    .md-image img {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* remove shadow around input in search panel*/
+    #md-searchpanel input {
+        box-shadow: none;
+    }
+
+    /* sidebar file menu item */
+    .dropdown-menu > li > a {
+        color: var(--text-color2);
+    }
+
+    .dropdown-menu > li > a:hover {
+        color: var(--hover-text-color);
+    }
+
+    /* remove up and down button from number type input*/
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none !important;
+    }
+
+    /* the indent example in setting.editor */
+    div[data-index="2"] .label-input-group td:last-child div {
+        border: 0 !important;
+        border-radius: 6px;
+        background-color: var(--bg-color5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin: 10px !important;
+    }
+
+    /* return button in setting menu */
+    .window-header button:hover {
+        color: var(--text-color2) !important;
+    }
+
+    /* select item (mostly in setting menu) */
+    select {
+        border: 0;
+        border-radius: 6px;
+        background-color: var(--input-color) !important;
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* enabled select item hover */
+    select:not([disabled]):hover {
+        color: var(--text-color2);
+        opacity: 1;
+    }
+
+    /* disabled select item hover */
+    select[disabled]:hover {
+        opacity: 0.5;
+    }
+
+    #recent-file-panel thead tr {
+        background-color: var(--table-thead-color);
+    }
+
+    #recent-file-panel tbody tr:nth-child(2n) {
+        background-color: var(--table-bg-darker-color);
+    }
+
+    #recent-file-panel tbody tr:nth-child(2n + 1) {
+        background-color: var(--table-bg-color);
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        padding-right: 10px;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    /* scrollbar track */
+    ::-webkit-scrollbar-track:hover {
+        background-color: var(--scrollbar-track-color) !important;
+        border-radius: 4px;
+    }
+
+    /* scrollbar thumb */
+    ::-webkit-scrollbar-thumb,
+    ::-webkit-scrollbar-thumb:active {
+        background-color: var(--scrollbar-thumb-color) !important;
+        border-radius: 4px;
+    }
+
+    .unibody-window #md-notification p {
+        bottom: -4px !important;
+    }
+
+    /* inline codeblock */
+    code {
+        font-size: 0.9em;
+        background-color: var(--bg-color5);
+        border-radius: 6px;
+        padding: 4px 4px 4px 4px;
+        margin: 0 0 0 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .on-focus-mode #write h1:not(.md-focus):before {
+        opacity: 0.5;
+    }
+
+    .on-focus-mode #write h2:not(.md-focus):before {
+        opacity: 0.5;
+    }
+
+    .on-focus-mode #write h1:not(.md-focus) {
+        border-color: var(--text-color5);
+    }
+
+    .on-focus-mode #write h2:not(.md-focus) {
+        border-color: var(--text-color5);
+    }
+
+    .on-focus-mode #write h3:not(.md-focus) {
+        border-color: var(--text-color5);
+    }
+
+    #write {
+        display: block !important;
+        visibility: visible;
+        opacity: 1;
+        transition: 0.3s;
+        max-width: 1200px;
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+
+    .yuxiang-sourceview-on #write {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    /* mermaid flowchart */
+    .node rect,
+    .node circle,
+    .node ellipse,
+    .node polygon,
+    .node path {
+        fill: var(--bg-color2) !important;
+        stroke: var(--menu-divider-color) !important;
+    }
+
+    .edgeLabel rect {
+        fill: transparent !important;
+    }
+
+    .cluster rect {
+        fill: var(--bg-color5) !important;
+        stroke: var(--menu-divider-color) !important;
+    }
+
+    rect[class*="activation"] {
+        fill: var(--bg-color2) !important;
+    }
+
+    /* mermaid class */
+    g.classGroup text {
+        fill: var(--text-color) !important;
+    }
+
+    g.classGroup rect {
+        stroke: var(--menu-divider-color) !important;
+        fill: var(--bg-color2) !important;
+    }
+
+    g.classGroup line {
+        stroke: var(--menu-divider-color) !important;
+    }
+
+    .cardinality text {
+        fill: var(--text-color) !important;
+    }
+
+    /* mermaid state v1 */
+    .stateGroup rect,
+    .stateGroup line {
+        fill: var(--bg-color2) !important;
+        stroke: var(--menu-divider-color) !important;
+    }
+
+    .stateGroup text {
+        fill: var(--text-color) !important;
+    }
+
+    .stateGroup circle {
+        fill: var(--bg-color4) !important;
+        stroke: var(--menu-divider-color) !important;
+    }
+
+    .state-note rect {
+        fill: var(--bg-color2) !important;
+        stroke: var(--menu-divider-color) !important;
+    }
+
+    .state-note text {
+        fill: var(--text-color) !important;
+    }
+
+    .stateLabel text {
+        fill: var(--text-color) !important;
+    }
+
+    .journey-section div {
+        color: var(--text-color) !important;
+    }
+
+    .task div {
+        color: var(--text-color) !important;
+    }
+
+    pre[mermaid-type="journey"] line {
+        stroke: var(--menu-divider-color) !important;
+        stroke-width: 2px !important;
+    }
+
+    pre[mermaid-type="journey"] text {
+        fill: var(--text-color1) !important;
+    }
+
+    pre[mermaid-type="journey"] g path,
+    pre[mermaid-type="journey"] g line {
+        fill: rgb(100, 104, 110) !important;
+        stroke: var(--text-color) !important;
+    }
+
+    /* mermaid erDiagram */
+    pre[mermaid-type="erDiagram"] rect {
+        fill: var(--bg-color2) !important;
+    }
+
+    pre[mermaid-type="erDiagram"] text {
+        fill: var(--text-color) !important;
+    }
+
+    pre[mermaid-type="erDiagram"] path {
+        stroke: var(--menu-divider-color) !important;
+    }
+
+    #ZERO_OR_ONE_START circle,
+    #ZERO_OR_ONE_END circle,
+    #ZERO_OR_MORE_START circle,
+    #ZERO_OR_MORE_END circle {
+        fill: var(--bg-color) !important;
+    }
+
+    .grid text {
+        fill: white !important;
+    }
+
+    /* mermaid pie chart */
+    g.legend > text {
+        fill: var(--text-color1) !important;
+    }
+
+    g.legend > rect {
+        stroke: var(--bg-color) !important;
+    }
+
+    g > path {
+        stroke: var(--bg-color) !important;
+    }
+
+    /* flow diagram */
+    .md-fences[lang="flow"] .md-diagram-panel-preview rect {
+        fill: var(--bg-color2) !important;
+        stroke: var(--menu-divider-color) !important;
+        stroke-width: 1.2 !important;
+    }
+
+    .md-fences[lang="flow"] .md-diagram-panel-preview path {
+        stroke: var(--menu-divider-color) !important;
+        stroke-width: 1.2 !important;
+    }
+
+    /* sequence diagram */
+    .md-fences[lang="sequence"] .md-diagram-panel-preview rect:not([fill="none"]) {
+        fill: var(--bg-color2) !important;
+        stroke: var(--menu-divider-color) !important;
+        stroke-width: 1.2 !important;
+    }
+
+    .md-fences[lang="sequence"] .md-diagram-panel-preview path {
+        fill: var(--menu-divider-color) !important;
+        stroke: var(--menu-divider-color) !important;
+        stroke-width: 1.2 !important;
+    }
+
+    .md-fences[lang="sequence"] text,
+    .md-fences[lang="flow"] text {
+        font-family: "Consolas", serif !important;
+    }
+
+    kbd {
+        background: var(--bg-color5);
+        color: var(--text-color1);
+        font-family: "Lucida Console", serif;
+        border-color: var(--menu-divider-color);
+        box-shadow: 0 2px 0 var(--menu-divider-color);
+    }
+
+
+    </style>
+    <title>主页</title>
+</head>
+<body class='yuxiang-export os-windows'>
+<div class='yuxiang-export-content'>
+    <div id='write' class=''><h1 align="center"><span id="cg">欢迎来到导航页！</span></h1>
+        <h5 align="center"><i>情绪稳定，活在当下，脚踏实地，不想太多！</i></h5>
+        <script>
+            setInterval("cg.innerHTML=new Date().toLocaleString()", 1000);
+        </script>
+        <blockquote><p><strong><span>常用链接&gt;</span></strong></p></blockquote>
+        <table>
+            <tbody>
+            <tr>
+                <td><a href="https://www.kdocs.cn/latest"><span>金山文档</span></a></td>
+                <td><a title="仅限查找学习资源！" href="https://www.bilibili.com/"><span>哔哩哔哩</span></a></td>
+                <td><a href="https://web.shiguangxu.com/home/user"><span>时光序</span></a></td>
+                <td><a href="https://www.aliyundrive.com/drive/"><span>阿里云盘</span></a></td>
+                <td><a href="https://ykt.eduyun.cn/ykt/index.html"><span>网络云平台</span></a></td>
+                <td><a href="https://hanyu.baidu.com/"><span>百度汉语</span></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <blockquote><p><strong><span>工具网站&gt;</span></strong></p></blockquote>
+        <table>
+            <tbody>
+            <tr>
+                <td><a title="阿里巴巴图标库" href="https://www.iconfont.cn/"><span>IconFont</span></a></td>
+                <td><a title="免费文件转换" href="https://convertio.co/zh/"><span>Convertio</span></a></td>
+                <td><a title="PDF工具集" href="https://smallpdf.com/cn"><span>Smallpdf</span></a></td>
+                <td><a href="http://www.zhuanhuanqi.com/danwei/danwei.html"><span>单位转换器</span></a></td>
+                <td><a href="https://fanyi.youdao.com/"><span>有道翻译</span></a></td>
+                <td><a href="https://xiezuocat.com/#/"><span>秘塔写作猫</span></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li><u><strong><a class="button" title="请谨慎使用此项，现在偷的懒你未来要加倍地还" onclick="showAlert()"><span>腾讯课堂开启自动任务</span></a></strong></u><span>（</span><a
+                    class="button" href="#ke"><span>如何使用？</span></a><span>）：</span><a class="button" href="#ke1"><span>自动送花</span></a><span> / </span><a
+                    class="button" href="#ke2"><span>自动签到</span></a><span> / </span><a class="button" href="#ke3"><span>自动刷屏</span></a><span> / </span><a
+                    class="button" href="#ke4"><span>下课自动发886</span></a><span> / </span><a class="button"
+                                                                                           href="#ke5"><span>显示/隐藏对话框</span></a>
+            </li>
+            <li><u><strong><a class="button" title="请谨慎使用此项，现在偷的懒你未来要加倍地还" onclick="showAlert()"><span>腾讯课堂关闭自动任务</span></a></strong></u><span>（</span><a
+                    class="button" href="#ke"><span>如何使用？</span></a><span>）：</span><a class="button" href="#ke6"><span>关闭送花</span></a><span> / </span><a
+                    class="button" href="#ke7"><span>关闭签到</span></a><span> / </span><a class="button" href="#ke8"><span>关闭刷屏</span></a><span> / </span><a
+                    class="button" href="#ke9"><span>关闭下课提示</span></a></li>
+        </ul>
+        <blockquote><p><strong><span>实用技巧&gt;</span></strong></p></blockquote>
+        <table>
+            <tbody>
+            <tr>
+                <td><a class="button" href="#tip3">护眼色合集</a></td>
+                <td><a class="button" href="#tip4">手机强制卸载预装</a></td>
+                <td><a class="button" href="#tip1">B站缓存合并为MP4</a></td>
+                <td><a class="button" href="#tip2">U盘设置个性图标</a></td>
+                <td><a class="button" href="#tip5">电脑文件共享</a></td>
+                <td><a href="https://www.xmind.cn/faq/question/equation/"><span>LaTeX详解</span></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li><u><a class="button"
+                      onclick="showAlert()"><span><span>Sublime Text</span></span></a></u><span>：查看 </span><a
+                    class="button" href="#sub1"><span><span>命令类</span></span></a><span> / </span><a class="button"
+                                                                                                    href="#sub2"><span><span>选择类</span></span></a><span> / </span><a
+                    class="button" href="#sub3"><span><span>编辑类</span></span></a><span> / </span><a class="button"
+                                                                                                    href="#sub4"><span><span>搜索类</span></span></a><span> / </span><a
+                    class="button" href="#sub5"><span><span>显示类</span></span></a><span> 快捷键，查看你的 </span><a
+                    class="button" href="#sub6"><span><span>配置文件</span></span></a><span> / </span><a class="button"
+                                                                                                     href="#sub7"><span><span>常用插件</span></span></a>
+            </li>
+            <li><u><a class="button"
+                      onclick="showAlert()"><span><span>Illustrator</span></span></a></u><span>：查看 </span><a
+                    class="button" href="#ai1"><span><span>工具使用</span></span></a><span> / </span><a class="button"
+                                                                                                    href="#ai2"><span><span>文件操作</span></span></a><span> / </span><a
+                    class="button" href="#ai3"><span><span>编辑操作</span></span></a><span> / </span><a class="button"
+                                                                                                    href="#ai4"><span><span>文字处理</span></span></a><span> / </span><a
+                    class="button" href="#ai5"><span><span>视图操作</span></span></a><span> 快捷键</span></li>
+            <li><u><a class="button"
+                      onclick="showAlert()"><span><span>Photoshop</span></span></a></u><span>：查看 </span><a
+                    class="button" href="#ps1"><span><span>工具使用</span></span></a><span> / </span><a class="button"
+                                                                                                    href="#ps2"><span><span>文件操作</span></span></a><span> / </span><a
+                    class="button" href="#ps3"><span><span>图像调整</span></span></a><span> / </span><a class="button"
+                                                                                                    href="#ps4"><span><span>编辑文字</span></span></a><span> / </span><a
+                    class="button" href="#ps5"><span><span>图层操作</span></span></a><span> / </span><a class="button"
+                                                                                                    href="#ps6"><span><span>其他操作</span></span></a><span> 快捷键</span>
+            </li>
+            <li><u><a class="button" onclick="showAlert()"><span><span>Premiere Pro</span></span></a></u>：查看 <a
+                    class="button" href="#pr"><span><span>实用操作</span></span></a>，查看 <a class="button" href="#pr1"><span><span>文件</span></span></a>
+                / <a class="button" href="#pr2"><span><span>编辑</span></span></a> / <a class="button"
+                                                                                      href="#pr3"><span><span>素材</span></span></a>
+                / <a class="button" href="#pr4"><span><span>序列</span></span></a> / <a class="button"
+                                                                                      href="#pr5"><span><span>标记</span></span></a>
+                / <a class="button" href="#pr6"><span><span>字幕</span></span></a> / <a class="button"
+                                                                                      href="#pr7"><span><span>窗口</span></span></a>
+                / <a class="button" href="#pr8"><span><span>帮助</span></span></a> 快捷键
+            </li>
+        </ul>
+        <blockquote><p><strong><span>常用资源&gt;</span></strong></p></blockquote>
+        <table>
+            <tbody>
+            <tr>
+                <td><a href="http://www.dzkbw.com/"><span>电子课本网</span></a></td>
+                <td>
+                    <a href="https://tv.cctv.com/live/cctv1/?spm=C28340.P4hQlpYBT2vN.ExidtyEJcS5K.1"><span>CCTV</span></a>
+                </td>
+                <td><a href="https://www.examcoo.com/index/ku"><span>考试酷网</span></a></td>
+                <td><a href="https://zh.numberempire.com/"><span>数字帝国</span></a></td>
+                <td><a href="http://bjtime.cn/riqi/"><span>日期计算器</span></a></td>
+                <td><a href="http://www.zlcool.com/"><span>资料库</span></a></td>
+                <td><a href="https://www.shijuan1.com/"><span>第一试卷网</span></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li><a href='https://www.haokelab.com/#/'><span>好科中考在线实验室</span></a><span>：在线实验室</span></li>
+            <li><a href='http://1s1k.eduyun.cn/portal/html/1s1k/course/1.html'><span>国家教育资源公共服务平台</span></a><span>：大型公共资源平台</span>
+            </li>
+            <li><a href='https://pan.baidu.com/'><span>百度网盘</span></a><span>：中容量速度慢的网盘存储服务</span></li>
+            <li><a href='https://aur.one/'><span>一个开始</span></a><span>：在线大型主页</span></li>
+            <li><a href='https://www.kolsou.com/'><span>酷搜</span></a><span>：百度网盘资源搜索</span></li>
+            <li><a href='https://make.mk/'><span>MAKE</span></a><span>：简洁的资讯页</span></li>
+            <li><a href='https://chrome.zzzmh.cn/'><span>极简插件</span></a><span>：Chrome插件</span></li>
+            <li><a href='https://www.qiuziti.com/'><span>求字体</span></a><span>：字体识别与搜索</span></li>
+            <li><a href='https://www.xkb1.com/'><span>新课标第一网</span></a><span>：课内学习资料</span></li>
+        </ul>
+        <blockquote>
+            <p><strong><span>媒体资源&gt;</span></strong></p>
+        </blockquote>
+        <table>
+            <tbody>
+            <tr>
+                <td><a title="媒体资源合集" href="https://www.kaolamedia.com/"><span>考拉新媒体</span></a></td>
+                <td><a title="综合素材资源大全" href="https://sc.chinaz.com/"><span>站长素材</span></a></td>
+                <td><a title="表情包资源" href="https://www.dbbqb.com/"><span>逗比拯救世界</span></a></td>
+                <td><a title="电影查找" href="https://www.mvcat.com/"><span>MVCAT</span></a></td>
+                <td><a title="字体库" href="https://www.hellofont.cn/home"><span>字由</span></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li><a href='https://www.videezy.com/'><span>Videezy</span></a><span>：免费商用高清视频库</span></li>
+            <li><a href='https://www.pexels.com/videos/'><span>PEXELS videos</span></a><span>：免费商用视频库</span></li>
+            <li><a href='https://www.videvo.net/'><span>Videvo</span></a><span>：免费商用高清视频素材</span></li>
+            <li><a href='https://www.newcger.com/'><span>NewCGer</span></a><span>：影视后期交流分享社区</span></li>
+            <li><a href='https://www.cgown.com/'><span>CG资源网</span></a><span>：影视特效素材分享交流</span></li>
+            <li><a href='https://www.aigei.com/'><span>爱给网</span></a><span>：综合影视素材资源下载</span></li>
+            <li><a href='https://taira-komori.jpn.org/freesoundcn.html'><span>小森平的免费下载音效</span></a><span>：短时音效下载</span>
+            </li>
+        </ul>
+        <blockquote>
+            <p><strong title="全部免费可商用！"><span>图像资源&gt;</span></strong></p>
+        </blockquote>
+        <table>
+            <tbody>
+            <tr>
+                <td><a title="免费矢量插画素材库" href="https://www.vecteezy.com/"><span>Vecteezy</span></a></td>
+                <td><a title="矢量图库" href="https://undraw.co/illustrations"><span>Undraw</span></a></td>
+                <td><a title="矢量图库" href="https://lukaszadam.com/illustrations"><span>Lukaszadam</span></a></td>
+                <td><a title="矢量图库" href="https://www.opendoodles.com/"><span>Open Doodles</span></a></td>
+                <td><a title="绿色小人矢量图库" href="https://pictogram2.com/"><span>Pictogram</span></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li><a href='https://www.91sotu.com/'><span>搜图导航</span></a><span>：各大图库集合</span></li>
+            <li><a href='https://huaban.com/home/'><span>花瓣</span></a><span>：设计发现采集灵感库</span></li>
+            <li><a href='https://www.nipic.com/'><span>昵图网</span></a><span>：原创素材共享平台</span></li>
+            <li><a href='https://www.iconfinder.com/'><span>IconFinder</span></a><span>：优质矢量彩图图标库</span></li>
+            <li><a href='https://pixabay.com/zh/'><span>Pixabay</span></a><span>：高清图片/视频素材库</span></li>
+            <li><a href='https://www.pexels.com/zh-cn/'><span>Pexels</span></a><span>：免费商用高清摄影图库</span></li>
+            <li><a href='https://stocksnap.io/'><span>StockSnap</span></a><span>：免费商用摄影图片素材</span></li>
+            <li><a href='https://unsplash.com/'><span>Unsplash</span></a><span>：免费商用摄影图库</span></li>
+            <li><a href='https://www.vcg.com/'><span>视觉中国</span></a><span>：正版图片影视素材</span></li>
+            <li><a href='https://mixkit.co/art/'><span>Mixkit Art</span></a><span>：视频图片综合</span></li>
+            <li><a href='https://www.cleanpng.com/'><span>CleanPNG</span></a><span>：免抠图素材</span></li>
+        </ul>
+        <blockquote>
+            <p><strong><span>音频资源&gt;</span></strong></p>
+        </blockquote>
+        <table>
+            <tbody>
+            <tr>
+                <td><a title="免费商用音效库" href="https://www.tosound.com/"><span>淘声网</span></a></td>
+                <td><a title="免费商用音效素材库" href="https://www.freesfx.co.uk/"><span>freeSFX</span></a></td>
+                <td><a title="免版税正版音乐音效素材" href="https://audiojungle.net/"><span>AudioJungle</span></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li><a href='https://www.jamendo.com/'><span>Jamendo Music</span></a><span>：免费音乐旋律素材库</span></li>
+            <li><a href='https://100audio.com/'><span>100Audio</span></a><span>：正版音乐音效素材</span></li>
+        </ul>
+        <blockquote><p><strong><span>壁纸资源&gt;</span></strong></p></blockquote>
+        <table>
+            <tbody>
+            <tr>
+                <td><a title="壁纸资源" href="https://wallhaven.cc/"><span>Wallhaven</span></a></td>
+                <td><a title="壁纸资源（这个比Wallhaven全）" href="https://wall.alphacoders.com/?lang=Chinese"><span>Wallpaper Hybss</span></a>
+                </td>
+                <td><a title="其实也不是简单" href="http://simpledesktops.com/"><span>简单桌面</span></a></td>
+                <td><a title="只有几种颜色组合成的壁纸，适合低配机" href="https://bz.zzzmh.cn/#classify"><span>极简壁纸</span></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li><a href='https://irocore.com/'><span>IroCore</span></a><span>：给你的壁纸配色</span></li>
+        </ul>
+        <hr/>
+        <p align="right"
+           title="Update 2021/7/6 by YuXiang (Mail:yuxiang187@qq.com DON'T HARASSMENT!!!) 主页采用GPL开源协议，代码开源/免费使用和引用/修改/衍生代码开源/免费使用，不允许修改后和衍生的代码做为闭源的商业软件发布和销售">
+            Main Page (Offline Version)</p></div>
+</div>
+<button onclick="topFunction()" id="myBtn" title="点击返回页面顶部">▲</button>
+<div class="popup" id="sub1">
+    <div class="popup-inner">
+        <div class="popup_text">
+            <p>Ctrl+Shift+P：打开命令面板<br>Ctrl+P：搜索项目中的文件<br>Ctrl+G：跳转到第几行<br>Ctrl+W：关闭当前打开文件<br>Ctrl+Shift+W：关闭所有打开文件<br>Ctrl+Shift+V：粘贴并格式化<br>Ctrl+D：选择单词，重复可增加选择下一个单词<br>Ctrl+L：选择行，重复可增加选择下一行<br>Ctrl+Shift+L：选择多行<br>Ctrl+Shift+Enter：在当前行前插入新行<br>Ctrl+X：删除当前行<br>Ctrl+M：跳转到对应括号<br>Ctrl+U：软撤销，撤销光标位置<br>Ctrl+J：选择标签内容<br>Ctrl+F：查找内容<br>Ctrl+Shift+F：查找并替换<br>Ctrl+H：替换<br>Ctrl+R：前往
+                method<br>Ctrl+N：新建窗口</p>
+        </div>
+        <div class="popup_text">
+            <p>Ctrl+K+B：开关侧栏<br>Ctrl+Shift+M：选中当前括号内容，重复可选择括号本身<br>Ctrl+F2：设置/删除标记<br>Ctrl+/：注释当前行<br>Ctrl+Shift+/：当前位置插入注释<br>Ctrl+Alt+/：块注释，并Focus到首行，用于写注释说明<br>Ctrl+Shift+A：选择当前标签前后，修改标签用的<br>F11：全屏<br>Shift+F11：全屏免打扰模式，只编辑当前文件<br>Alt+F3：选择所有相同的词<br>Alt+.：闭合标签<br>Alt+Shift+数字：分屏显示<br>Alt+数字：切换打开第N个文件<br>Shift+右键拖动：矩形选择<br>鼠标的前进后退键可切换Tab文件<br>Ctrl+依次点击或选取：可需要编辑的多个位置<br>Ctrl+Shift+上下键：替换行
+            </p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="sub2">
+    <div class="popup-inner">
+        <div class="popup_text">
+            <p>Ctrl+D 选中光标所占的文本，继续操作则会选中下一个相同的文本<br>Alt+F3 选中文本按下快捷键，即可一次性选择全部的相同文本进行同时编辑，例如：快速选中并更改所有相同的变量名、函数名等<br>Ctrl+L
+                选中整行，继续操作则继续选择下一行，效果和 Shift+↓ 效果一样<br>Ctrl+Shift+L 先选中多行，再按下快捷键，会在每行行尾插入光标，即可同时编辑这些行<br>Ctrl+Shift+M
+                选择括号内的内容（继续选择父括号），例如：快速选中删除函数中的代码，重写函数体代码或重写括号内里的内容<br>Ctrl+M 光标移动至括号内结束或开始的位置<br>Ctrl+Enter
+                在下一行插入新行，例如：即使光标不在行尾，也能快速向下插入一行<br>Ctrl+Shift+Enter 在上一行插入新行，例如：即使光标不在行首，也能快速向上插入一行</p>
+        </div>
+        <div class="popup_text">
+            <p>Ctrl+← 向左单位性地移动光标，快速移动光标<br>Ctrl+→ 向右单位性地移动光标，快速移动光标<br>shift+↑ 向上选中多行<br>shift+↓ 向下选中多行<br>Shift+←
+                向左选中文本<br>Shift+→ 向右选中文本<br>Ctrl+Shift+← 向左单位性地选中文本<br>Ctrl+Shift+→ 向右单位性地选中文本<br>Ctrl+Shift+↑
+                将光标所在行和上一行代码互换（将光标所在行插入到上一行之前）<br>Ctrl+Shift+↓ 将光标所在行和下一行代码互换（将光标所在行插入到下一行之后）<br>Ctrl+Alt+↑
+                向上添加多行光标，可同时编辑多行<br>Ctrl+Alt+↓ 向下添加多行光标，可同时编辑多行<br>Ctrl+Shift+[ 选中代码，按下快捷键，折叠代码<br>Ctrl+Shift+]
+                选中代码，按下快捷键，展开代码<br>Ctrl+K+0 展开所有折叠代码</p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="sub3">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>Ctrl+J 合并选中的多行代码为一行，例如：将多行格式的CSS属性合并为一行<br>Ctrl+Shift+D 复制光标所在整行，插入到下一行<br>Tab 向右缩进<br>Shift+Tab 向左缩进<br>Ctrl+K+K
+                从光标处开始删除代码至行尾<br>Ctrl+Shift+K 删除整行<br>Ctrl+/ 注释单行<br>Ctrl+Shift+/ 注释多行<br>Ctrl+K+U 转换大写<br>Ctrl+K+L 转换小写<br>Ctrl+Z
+                撤销<br>Ctrl+Y 恢复撤销<br>Ctrl+U 软撤销，感觉和 Ctrl+Z 一样<br>Ctrl+F2 设置书签<br>Ctrl+T 左右字母互换<br>F6 单词检测拼写</p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+
+<div class="popup" id="sub4">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>Ctrl+F 打开底部搜索框，查找关键字<br>Ctrl+shift+F 在文件夹内查找，sublime允许添加多个文件夹进行查找<br>Ctrl+P 打开搜索框，例如：<br>
+                1、输入当前项目中的文件名，快速搜索文件<br> 2、输入@和关键字，查找文件中函数名<br> 3、输入：和数字，跳转到文件中该行代码<br> 4、输入#和关键字，查找变量名<br>Ctrl+G
+                打开搜索框，自动带：，输入数字跳转到该行代码<br>Ctrl+R 打开搜索框，自动带@，输入关键字，查找文件中的函数名<br>Ctrl+：
+                打开搜索框，自动带#，输入关键字，查找文件中的变量名、属性名等<br>Ctrl+Shift+P 打开命令框<br>Esc 退出光标多行选择，退出搜索框，命令框等</p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="sub5">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>Ctrl+Tab 按文件浏览过的顺序切换当前窗口的标签页<br>Ctrl+PageDown 向左切换当前窗口的标签页<br>Ctrl+PageUp 向右切换当前窗口的标签页<br>Alt+Shift+1
+                窗口分屏，恢复默认1屏（非小键盘的数字）<br>Alt+Shift+2 左右分屏-2列<br>Alt+Shift+3 左右分屏-3列<br>Alt+Shift+4 左右分屏-4列<br>Alt+Shift+5
+                等分4屏<br>Alt+Shift+8 垂直分屏-2屏<br>Alt+Shift+9 垂直分屏-3屏<br>Ctrl+K+B 开启/关闭侧边栏<br>F11 全屏模式<br>Shift+F11 免打扰模式
+            </p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="sub6">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>请点击菜单“Preferences - Settings”进行设置，记得安装<code>Theme-Soda</code>主题</p>
+            <label for="subtext1"></label><textarea cols="80" rows="20" id="subtext1" readonly="readonly">{
+    "color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
+    //Default Font:Consolas,Size:13
+    "font_face": "微软雅黑",
+    "font_size": 15,
+    "caret_style": "smooth",
+    "soda_classic_tabs": true,
+    "theme": "Soda Dark 3.sublime-theme",
+    "ignored_packages": [
+        "Vintage",
+    ],
+    "update_check": false,
+    // The number of spaces a tab is considered equal to
+    "tab_size": 4,
+    // Set to true to insert spaces when tab is pressed
+    "translate_tabs_to_spaces": true,
+    "expand_tabs_on_save": true,
+}</textarea>
+            <input type="button" value="复制" onclick="copyText('subtext1')"><br>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="sub7">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>Sublime Text 常用插件</strong></p>
+            <ul>
+                <li><strong>sublimeTepl</strong>（相应的模板在<code>C:\Users\usersName\AppData\Roaming\Sublime Text
+                    3\Packages\SublimeTmpl\templates</code>下，相应的快捷键如下：<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>H</kbd>新建 HTML
+                    文件；<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>J</kbd>新建 JavaScript
+                    文件；<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd>新建 CSS 文件；<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd>新建
+                    PHP 文件；<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>R</kbd>新建 Ruby 文件；<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>新建
+                    Python 文件）
+                </li>
+                <li><strong>ConvertToUTF8</strong>：其他编码转换成UTF8编码</li>
+                <li><strong>BracketHighlighter</strong>：高亮显示括号、引号和标签</li>
+                <li><strong>ColorHighlighter</strong>：拾取颜色</li>
+                <li><strong>AutoPep8</strong>：Python代码格式化，设置<code>&quot;format_on_save&quot;: true,</code>保存时自动格式化</li>
+                <li><strong>AutoFileName</strong>：自动补全文件名</li>
+                <li><strong>SideBarEnhancements</strong>：侧栏菜单扩充</li>
+                <li><strong>Anaconda</strong>：代码分析平台，用于代码规范检查</li>
+                <li><strong>Jedi</strong>：Python自动补全，<strong>禁止和Anaconda共存，否则输入不了左括号，上面一样</strong></li>
+            </ul>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ps1">
+    <div class="popup-inner">
+        <div class="popup_text">
+            <p>Ctrl+Shift+P：打开命令面板<br>Ctrl+P：搜索项目中的文件<br>Ctrl+G：跳转到第几行<br>Ctrl+W：关闭当前打开文件<br>Ctrl+Shift+W：关闭所有打开文件<br>Ctrl+Shift+V：粘贴并格式化<br>Ctrl+D：选择单词，重复可增加选择下一个单词<br>Ctrl+L：选择行，重复可增加选择下一行<br>Ctrl+Shift+L：选择多行<br>Ctrl+Shift+Enter：在当前行前插入新行<br>Ctrl+X：删除当前行<br>Ctrl+M：跳转到对应括号<br>Ctrl+U：软撤销，撤销光标位置<br>Ctrl+J：选择标签内容<br>Ctrl+F：查找内容<br>Ctrl+Shift+F：查找并替换<br>Ctrl+H：替换<br>Ctrl+R：前往
+                method<br>Ctrl+N：新建窗口</p>
+        </div>
+        <div class="popup_text">
+            <p>Ctrl+K+B：开关侧栏<br>Ctrl+Shift+M：选中当前括号内容，重复可选择括号本身<br>Ctrl+F2：设置/删除标记<br>Ctrl+/：注释当前行<br>Ctrl+Shift+/：当前位置插入注释<br>Ctrl+Alt+/：块注释，并Focus到首行，用于写注释说明<br>Ctrl+Shift+A：选择当前标签前后，修改标签用的<br>F11：全屏<br>Shift+F11：全屏免打扰模式，只编辑当前文件<br>Alt+F3：选择所有相同的词<br>Alt+.：闭合标签<br>Alt+Shift+数字：分屏显示<br>Alt+数字：切换打开第N个文件<br>Shift+右键拖动：矩形选择<br>鼠标的前进后退键可切换Tab文件<br>Ctrl+依次点击或选取：可需要编辑的多个位置<br>Ctrl+Shift+上下键：替换行
+            </p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ps2">
+    <div class="popup-inner">
+        <div class="popup_text">
+            <p>新建图形文件：【Ctrl】+【N】<br>默认设置创建新文件：【Ctrl】+【Alt】+【N】<br>打开已有的图像：【Ctrl】+【O】<br>打开为：【Ctrl】+【Alt】+【O】<br>新建图层：【Ctrl】+【Shift】+【N】<br>另存为：【Ctrl】+【Shift】+【S】<br>关闭当前图像：【Ctrl】+【W】<br>显示的“预置”对话框：【Alt】+【Ctrl】+【K】<br>存储副本：【Ctrl】+【Alt】+【S】<br>保存当前图像：【Ctrl】+【S】<br>应用当前所选效果并使参数可调：【A】<br>页面设置【Ctrl】+【Shift】+【P】
+            </p>
+        </div>
+        <div class="popup_text">
+            <p>打开预置对话框：【Ctrl】+【K】<br>设置透明区域与色域：【Ctrl】+【4】<br>设置“常规”选项：【Ctrl】+【1】<br>设置参考线与网格：【Ctrl】+【6】<br>打印：【Ctrl】+【P】<br>设置存储文件：【Ctrl】+【2】<br>设置显示和光标：【Ctrl】+【3】<br>斜面和浮雕效果：【Ctrl】+【5】<br>内发光效果：【Ctrl】+【4】<br>外发光效果：【Ctrl】+【3】<br>设置单位与标尺：【Ctrl】+【5】<br>通道选择【ctrl+1/2/3/4】
+            </p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ps3">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>自由变换：【ctrl】+【T】<br>再次变换：【Ctrl】+【Shift】+【Alt】+【T】<br>图像大小：【Ctrl】+【Alt】+【I】<br>色阶：【Ctrl】+【L】<br>画布大小：【Ctrl】+【Alt】+【C】<br>色相/饱和度：【Ctrl】+【U】<br>曲线：【Ctrl】+【M】<br>黑白：【Alt】+【Shift】+【Ctrl】+【B】<br>去色：【Shift】+【Ctrl】+【U】<br>反相：【Ctrl】+【I】<br>色彩平衡：【Ctrl】+【B】
+            </p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ps4">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>
+                移动图像的文字：【Ctrl】+选中文字<br>选择文字时显示/隐藏：【Ctrl】+【H】<br>选择从插入点到鼠标点的文字：【向上键】+点击鼠标<br>使用/不使用下划线：【向上键】+【Ctrl】+【U】<br>使用/不使用中间线：【向上键】+【Ctrl】+【/】<br>使用/不使用大写英文：【向上键】+【Ctrl】+【K】<br>使用/不使用Caps：【向上键】+【Ctrl】+【H】
+            </p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ps5">
+    <div class="popup-inner">
+        <div class="popup_text">
+            <p>正常：【Shift】+【Alt】+【N】<br>正片叠底：【Shift】+【Alt】+【M】<br>循环选择混合模式：【Shift】+【-】或【+】<br>溶解：【Shift】+【Alt】+【I】<br>颜色减淡：【Shift】+【Alt】+【D】<br>阈值（位图模式）：【Shift】+【Alt】+【L】<br>背后：【Shift】+【Alt】+【Q】<br>颜色加深：【Shift】+【Alt】+【B】<br>强行关闭当前话框：【Ctrl】+【Alt】+【W】<br>清除：【Shift】+【Alt】+【R】<br>饱和度：【Shift】+【Alt】+【T】<br>返回上一步：【Ctrl】+【Alt】+【Z】<br>屏幕：【Shift】+【Alt】+【S】<br>重新选择：【Ctrl】+【Shift】+【D】<br>修改字距：【Alt】+【←/→】<br>叠加：【Shift】+【Alt】+【O】<br>变亮：【Shift】+【Alt】+【G】<br>修改行距：【Alt】+【↑/↓】
+            </p>
+        </div>
+        <div class="popup_text">
+            <p>柔光：【Shift】+【Alt】+【F】<br>差值：【Shift】+【Alt】+【E】<br>粘贴：【Ctrl】+【Alt】+【V】<br>强光：【Shift】+【Alt】+【H】<br>排除：【Shift】+【Alt】+【X】<br>全部选取：【Ctrl】+【A】<br>变暗：【Shift】+【Alt】+【K】<br>色相：【Shift】+【Alt】+【U】<br>路径变选区数字键盘的：【Enter】<br>变亮：【Shift】+【Alt】+【G】<br>颜色：【Shift】+【Alt】+【C】<br>羽化选择：【Ctrl】+【Alt】+【D】<br>光度：【Shift】+【Alt】+【Y】<br>复制当前图层：【Ctrl】+【J】<br>载入选区：【Ctrl】+点按图层、路径<br>取消选择：【Ctrl】+【D】<br>反向选择：【Ctrl】+【Shift】+【I】
+            </p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ps6">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>多种工具共用一个快捷键的可同时按【Shift】加此快捷键选取<br>查看键盘所有快捷键：【Ctrl】+【Alt】+【Shift】+【K】</p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="pr">
+    <div class="popup-inner">
+        <ul>
+            <li><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>K</kbd>：调出快捷键面板</li>
+            <li><kbd>Ctrl</kbd>+<kbd>\</kbd>：隐藏标题栏</li>
+            <li><kbd>Ctrl</kbd>+<kbd>I</kbd>：快速导入素材</li>
+            <li><kbd>&#39;</kbd>：快速插入素材</li>
+            <li><kbd>Q</kbd>/<kbd>W</kbd>：删除剪辑前半 / 后半部分</li>
+            <li><kbd>Shift</kbd>+<kbd>Q</kbd>/<kbd>K</kbd>：补齐被剪辑片段</li>
+            <li><kbd>Alt</kbd>+<kbd>鼠标左键</kbd>：单独选中音频或者视频</li>
+            <li><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>V</kbd>粘贴属性</li>
+            <li><kbd>\</kbd>：一键恢复时间轴长度</li>
+            <li><kbd>F</kbd>：一键匹配原始素材</li>
+            <li><kbd>A</kbd>/<kbd>Shift</kbd>+<kbd>A</kbd>：向前 / 向后选择</li>
+            <li><kbd>L</kbd>/<kbd>J</kbd>：正向 / 反向加速预览视频</li>
+            <li><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>鼠标左键移动</kbd>：快速交换片段</li>
+            <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>K</kbd>：快速批量剪辑单条或多条轨道</li>
+            <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>：快速添加音视频默认转场</li>
+            <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>：取消选定范围</li>
+            <li><kbd>Ctrl</kbd>+<kbd>+</kbd>/<kbd>-</kbd>：单独缩放视频轨道</li>
+            <li><kbd>Alt</kbd>+<kbd>+</kbd>/<kbd>-</kbd>：单独缩放音频轨道</li>
+            <li><kbd>Shift</kbd>+<kbd>+</kbd>/<kbd>-</kbd>：同时缩放音视频轨道</li>
+            <li><kbd>Shift</kbd>+<kbd>E</kbd>：启用或隐藏某段剪辑或音频</li>
+        </ul>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="pr1">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>文件：</strong></p>
+            <textarea cols="80" rows="20" readonly="readonly">Ctrl + Alt + N 新建项目
+Ctrl + O 打开项目
+Ctrl + Alt + O 在Brige 中浏览
+Ctrl + Shift + W 关闭项目
+Ctrl + W 关闭
+Ctrl + S 保存
+Ctrl + Shift + S 另存为
+F5 采集
+F6 批采集
+Ctrl + Alt + I 从媒体浏览器导入
+Ctrl + I 导入
+Ctrl + M 导出媒体
+Ctrl + Q 退出</textarea>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="pr2">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>编辑：</strong></p>
+            <textarea cols="80" rows="20" readonly="readonly">Ctrl + Z 还原
+Ctrl + Shift + Z 重做
+Ctrl + X 剪切
+Ctrl + C 复制
+Ctrl + V 粘贴
+Ctrl + Shift + V 粘贴插入
+Ctrl + Alt + V 粘贴属性
+Delete 清除
+Shift + Delete 波纹删除
+Ctrl + Shift + / 副本
+Ctrl + A 全选
+Ctrl + Shift + A 取消全选
+Ctrl + F 查找
+Ctrl + E 编辑原始资源
+Ctrl + / 新建文件夹
+Ctrl + PageUp 项目窗口列表查看图标
+Ctrl + PageDown 项目窗口放大查看图标
+Shift + F 在项目窗口查找</textarea>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="pr3">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>素材：</strong></p>
+            <textarea cols="80" rows="20" readonly="readonly">Q 缩放为当前画面大小（自定义）
+Ctrl + R 速度
+， 插入
+. 覆盖
+Ctrl + B嵌套（自定义）
+Ctrl + G 编组
+Ctrl + Shift + G 解组
+G 音频增益
+Shift + G 音频声道
+Shift + E 启用
+Ctrl + L 链接/取消链接
+Ctrl + U 制作子剪辑</textarea>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="pr4">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>序列：</strong></p>
+            <textarea cols="80" rows="20" readonly="readonly">Ctrl + N 新建序列
+Enter 渲染工作区效果
+F 匹配帧
+Ctrl + K 剪切
+Ctrl + Shift + K 所有轨道剪切
+T 修整编辑
+E 延伸下一编辑到播放指示器
+Ctrl + D 默认视频转场
+Ctrl + Shift + D 默认音频转场
+Shift + D 默认音视频转场
+； 提升
+‘ 提取
+= 放大
+- 缩小
+S 吸附
+Shift + ； 序列中下一段
+Ctrl + Shift + ； 序列中上一段</textarea>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="pr5">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>标记：</strong></p>
+            <textarea cols="80" rows="20" readonly="readonly">I 标记入点
+O 标记出点
+X 标记素材入出点
+Shift + / 标记素材
+Shift + \ 在项目窗口查看形式
+Shift + * 返回媒体浏览
+/ 标记选择
+Shift + I 跳转入点
+Shift + O 跳转出点
+Ctrl + Shift + I 清除入点
+Ctrl + Shift + Q 清除出点
+Ctrl + Shift + X 清除入出点
+M 添加标记
+Shift + M 到下一个标记
+Ctrl + Shift + M 到上一个标记
+Ctrl + Alt + M 清除当前标记
+Ctrl + Alt + Shift + M 清除所有标记</textarea>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="pr6">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>字幕：</strong></p>
+            <textarea cols="80" rows="20" readonly="readonly">Ctrl + T 新建字幕
+Ctrl + Shift + L 左对齐
+Ctrl + Shift + C 居中
+Ctrl + Shift + R 右对齐
+Ctrl + Shift + T 制表符设置
+Ctrl + J 模板
+Ctrl + Alt + ] 上一层的下一个对象
+Ctrl + Alt + [ 下一层的下一个对象
+Ctrl + Shift + ] 放到最上层
+Ctrl + ] 上移一层
+Ctrl + Shift + [ 放到最下层
+Ctrl + [ 下移一层</textarea>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="pr7">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>窗口：</strong></p>
+            <textarea cols="80" rows="20" readonly="readonly">Shift + 1 项目
+Shift + 2 源监视器
+Shift + 3 时间轴
+Shift + 4 节目监视器
+Shift + 5 特效控制台
+Shift + 6 调音台
+Shift + 7 效果
+Shift + 8 媒体预览</textarea>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="pr8">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>帮助：</strong></p>
+            <textarea cols="80" rows="20" readonly="readonly">Ctrl + Shift + Space 入点播放到出点
+Ctrl + P 从播放指示器播放到出点
+Ctrl +Alt + Q 修剪上一个编辑点到播放指示器
+Ctrl +Alt + W 修剪下一个编辑点到播放指示器
+Ctrl + 1 切换到摄像机1
+Ctrl + 2 切换到摄像机2
+Ctrl + 3 切换到摄像机3
+Ctrl + 4 切换到摄像机4
+Ctrl + 5 切换到摄像机5
+Ctrl + 6 切换到摄像机6
+Ctrl + 7 切换到摄像机7
+Ctrl + 8 切换到摄像机8
+Shift + 0 切换多机位视图
+Ctrl + Alt + 0 切换多有源视频
+Ctrl + Alt + 9 切换多有源音频
+Ctrl + 0 切换所有视频目标
+Ctrl + 9 切换所有音频目标
+Ctrl + Right 修整上一层
+Ctrl + Shift + Right 修整上次多层
+Ctrl + Left 修整下一层
+Ctrl + Shift + Left 修整下处多层
+K 停止穿梭
+Shift + T 切换修整类型
+Ctrl + ` 切换全屏
+Shift + Right 前进五帧
+L 右穿梭
+Shift + Left 后退五帧
+Shift + Up 跳转上一个编辑点
+Shift + Down 跳转下一个编辑点
+Ctrl + Shift + E 导出单帧
+Alt + Shift + 0 重置当前工作区
+Alt + Shift + 1 编辑
+Alt + Shift + 2 编辑
+Alt + Shift + 3 元数据记录
+Alt + Shift + 4 效果
+Alt + Shift + 5 项目
+Alt + Shift + 6 音频
+Alt + Shift + 7 颜色校正（三视图窗口）
+J 右穿梭
+Shift + L 慢速右穿梭
+Shift + J 慢速左穿梭
+Space 播放-停止
+Shift + K 播放临近区域
+Ctrl + Shift + F 显示嵌套
+` 最大化或恢复光标下的帧
+Shift + + 最大化所有轨道
+Shift + - 最小化所有轨道
+Ctrl + + 扩大视频轨道
+Ctrl + - 缩小视频轨道
+Right 步进
+Left 后退
+Ctrl + Shift + P 清除展示帧
+\ 缩放到序列
+Shift + P 设置展示帧
+Down 下面标尺表示右移动
+Up 下面标尺表示左移动
+End 跳转到序列-素材结束点
+Home 跳转到序列-素材开始点
+Shift + End 跳转到所选素材结束点</textarea>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ai1">
+    <div class="popup-inner">
+        <div class="popup_text">
+            <p>说明：多种工具共用一个快捷键的可同时按【Shift】加此快捷键选取；当按下【CapsLock】键时，可直接用此快捷键切换<br>移动工具【V】<br>直接选取工具、组选取工具【A】<br>钢笔、添加锚点、删除锚点、改变路径角度【P】<br>添加锚点工具【+】<br>删除锚点工具【-】<br>文字工具组【T】<br>椭圆、多边形、星形、螺旋形【L】<br>增加边数、倒角半径及螺旋圈数（在【L】、【M】状态下绘图）【↑】<br>减少边数、倒角半径及螺旋圈数（在【L】、【M】状态下绘图）【↓】<br>矩形、圆角矩形工具【M】<br>画笔工具【B】<br>铅笔、圆滑、抹除工具【N】<br>旋转、转动工具【R】<br>缩放、拉伸工具【S】<br>镜向、倾斜工具【O】
+            </p>
+        </div>
+        <div class="popup_text">
+            <p>自由变形工具【E】<br>混合、自动勾边工具【W】<br>图表工具（七种图表）【J】<br>渐变网点工具【U】<br>渐变填色工具【G】<br>颜色取样器【I】<br>油漆桶工具【K】<br>剪刀、餐刀工具【C】<br>视图平移、页面、尺寸工具【H】<br>放大镜工具【Z】<br>默认前景色和背景色【D】<br>切换填充和描边【X】<br>切换全屏模式组【F】<br>切换为颜色填充【&lt;】<br>切换为渐变填充【&gt;】
+                <br>切换为无填充【/】 <br>临时使用抓手工具【空格】 <br>精确进行镜向、旋转选择相应工具后按【回车】 <br>复制物体在【R】、【O】、【V】等状态下按【Alt】+【拖动】 </p></div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ai2">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>新建图形文件【Ctrl】+【N】<br>打开已有的图像【Ctrl】+【O】<br>关闭当前图像【Ctrl】+【W】<br>保存当前图像【Ctrl】+【S】<br>另存为...【Ctrl】+【Shift】+【S】<br>存储副本【Ctrl】+【Alt】+【S】<br>页面设置【Ctrl】+【Shift】+【P】<br>文档设置【Ctrl】+【Alt】+【P】<br>打印【Ctrl】+【P】<br>打开“预置”对话框【Ctrl】+【K】<br>回复到上次存盘之前的状态【F12】
+            </p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ai3">
+    <div class="popup-inner">
+        <div class="popup_text">
+            <p>
+                还原前面的操作【Ctrl】+【Z】<br>重复操作【Ctrl】+【Shift】+【Z】<br>将选取的内容剪切放到剪贴板【Ctrl】+【X】或【F2】<br>将选取的内容拷贝放到剪贴板【Ctrl】+【C】<br>将剪贴板的内容粘到当前图形中【Ctrl】+【V】或【F4】<br>将剪贴板的内容粘到最前面【Ctrl】+【F】<br>将剪贴板的内容粘到最后面【Ctrl】+【B】<br>删除所选对象【DEL】<br>选取全部对象【Ctrl】+【A】<br>取消选择【Ctrl】+【Shift】+【A】<br>再次转换【Ctrl】+【D】<br>发送到最前面【Ctrl】+【Shift】+【]】<br>向前发送【Ctrl】+【]】<br>发送到最后面【Ctrl】+【Shift】+【[】<br>向后发送【Ctrl】+【[】<br>群组所选物体【Ctrl】+【G】<br>取消所选物体的群组【Ctrl】+【Shift】+【G】<br>锁定所选的物体【Ctrl】+【2】
+            </p>
+        </div>
+        <div class="popup_text">
+            <p>锁定没有选择的物体【Ctrl】+【Alt】+【Shift】+【2】<br>全部解除锁定【Ctrl】+【Alt】+【2】<br>隐藏所选物体【Ctrl】+【3】<br>隐藏没有选择的物体【Ctrl】+【Alt】+【Shift】+【3】<br>显示所有已隐藏的物体【Ctrl】+【Alt】+【3】<br>联接断开的路径【Ctrl】+【J】<br>对齐路径点【Ctrl】+【Alt】+【J】<br>调合两个物体【Ctrl】+【Alt】+【B】<br>取消调合【Ctrl】+【Alt】+【Shift】+【B】<br>调合选项选【W】后按【回车】<br>新建一个图像遮罩【Ctrl】+【7】<br>取消图像遮罩【Ctrl】+【Alt】+【7】<br>联合路径【Ctrl】+【8】<br>取消联合【Ctrl】+【Alt】+【8】<br>图表类型选【J】后按【回车】<br>再次应用最后一次使用的滤镜【Ctrl】+【E】<br>应用最后使用的滤镜并调节参数【Ctrl】+【Alt】+【E】
+            </p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ai4">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>锁定没有选择的物体【Ctrl】+【Alt】+【Shift】+【2】<br>全部解除锁定【Ctrl】+【Alt】+【2】<br>隐藏所选物体【Ctrl】+【3】<br>隐藏没有选择的物体【Ctrl】+【Alt】+【Shift】+【3】<br>显示所有已隐藏的物体【Ctrl】+【Alt】+【3】<br>联接断开的路径【Ctrl】+【J】<br>对齐路径点【Ctrl】+【Alt】+【J】<br>调合两个物体【Ctrl】+【Alt】+【B】<br>取消调合【Ctrl】+【Alt】+【Shift】+【B】<br>调合选项选【W】后按【回车】<br>新建一个图像遮罩【Ctrl】+【7】<br>取消图像遮罩【Ctrl】+【Alt】+【7】<br>联合路径【Ctrl】+【8】<br>取消联合【Ctrl】+【Alt】+【8】<br>图表类型选【J】后按【回车】<br>再次应用最后一次使用的滤镜【Ctrl】+【E】<br>应用最后使用的滤镜并调节参数【Ctrl】+【Alt】+【E】
+            </p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ai5">
+    <div class="popup-inner">
+        <div class="popup_text">
+            <p>
+                <br>将图像显示为边框模式（切换）【Ctrl】+【Y】<br>对所选对象生成预览（在边框模式中）【Ctrl】+【Shift】+【Y】<br>放大视图【Ctrl】+【+】<br>缩小视图【Ctrl】+【-】<br>放大到页面大小【Ctrl】+【0】<br>实际象素显示【Ctrl】+【1】<br>显示/隐藏所路径的控制点【Ctrl】+【H】<br>隐藏模板【Ctrl】+【Shift】+【W】<br>显示/隐藏标尺【Ctrl】+【R】<br>显示/隐藏参考线【Ctrl】+【;】<br>锁定/解锁参考线【Ctrl】+【Alt】+【;】<br>将所选对象变成参考线【Ctrl】+【5】<br>将变成参考线的物体还原【Ctrl】+【Alt】+【5】
+            </p>
+        </div>
+        <div class="popup_text">
+            <p>贴紧参考线【Ctrl】+【Shift】+【;】<br>显示/隐藏网格【Ctrl】+【”】<br>应用敏捷参照【Ctrl】+【U】<br>显示/隐藏“字体”面板【Ctrl】+【T】<br>显示/隐藏“段落”面板【Ctrl】+【M】<br>显示/隐藏“画笔”面板【F5】<br>显示/隐藏“颜色”面板【F6】/【Ctrl】+【I】<br>显示/隐藏“图层”面板【F7】<br>显示/隐藏“信息”面板【F8】<br>显示/隐藏“渐变”面板【F9】<br>显示/隐藏“描边”面板【F10】<br>显示/隐藏“属性”面板【F11】<br>显示/隐藏所有命令面板【TAB】
+            </p>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="tip1">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <strong>B站缓存合并为MP4</strong><br>
+            <li>将缓存的<code>audio. m4s</code>文件和<code>video.m4s</code>文件拖到此界面FFmpeg的<code>bin</code>目录下面</li>
+            <li>在这里按住<kbd>Shift</kbd>+<kbd>鼠标右键</kbd>在菜单内选择打开命令提示符窗口</li>
+            <li>输入<code>.\ffmpeg.exe -i video.m4s -i audio.m4s -codec copy Output.mp4</code>回车即可</li>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="tip2">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>U盘设置个性图标</strong></p>
+            <p>先在文件夹选项取消勾选<strong>“隐藏已经文件类型的扩展名”和</strong>“显示隐藏的文件”</p>
+            <ol start="">
+                <li>首先制作好一个<code>.ico</code>格式的图片，然后保存在U盘根目录中，并将图标命名为<code>favicon.ico</code></li>
+                <li>U盘根目录新建一个文本文件并命名为<code>autorun.inf</code></li>
+                <li>
+                    用记事本工具打开<code>autorun.inf</code>文件，<strong>然后在里面输入下面的内容并保存关闭（注意要区分两行写）</strong><code>[autorun]</code><br><code>icon=favicon.ico</code>
+                </li>
+                <li>将<code>autorun.inf</code>和<code>favicon.ico</code>文件<strong>都设置成只读和隐藏</strong></li>
+                <li>将U盘拔出然后插上电脑，OK</li>
+            </ol>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="tip3">
+    <div class="popup-inner">
+        <table>
+            <tbody>
+            <tr>
+                <th><strong>护眼色合集</strong></th>
+                <th><strong>十六进制颜色码</strong></th>
+                <th><strong>RGB颜色值</strong></th>
+            </tr>
+            <tr>
+                <td>
+                    <div style="color:#19CAAD;">████████████</div>
+                </td>
+                <td>
+                    <div style="color:#19CAAD;">19CAAD</div>
+                </td>
+                <td>
+                    <div style="color:#19CAAD;">25, 202, 173</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="color:#8CC7B5;">████████████</div>
+                </td>
+                <td>
+                    <div style="color:#8CC7B5;">8CC7B5</div>
+                </td>
+                <td>
+                    <div style="color:#8CC7B5;">140, 199, 181</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="color:#A0EEE1;">████████████</div>
+                </td>
+                <td>
+                    <div style="color:#A0EEE1;">A0EEE1</div>
+                </td>
+                <td>
+                    <div style="color:#A0EEE1;">160, 238, 225</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="color:#BEE7E9;">████████████</div>
+                </td>
+                <td>
+                    <div style="color:#BEE7E9;">BEE7E9</div>
+                </td>
+                <td>
+                    <div style="color:#BEE7E9;">190, 231, 233</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="color:#BEEDC7;">████████████</div>
+                </td>
+                <td>
+                    <div style="color:#BEEDC7;">BEEDC7</div>
+                </td>
+                <td>
+                    <div style="color:#BEEDC7;">190, 237, 199</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="color:#D6D5B7;">████████████</div>
+                </td>
+                <td>
+                    <div style="color:#D6D5B7;">D6D5B7</div>
+                </td>
+                <td>
+                    <div style="color:#D6D5B7;">214, 213, 183</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="color:#D1BA74;">████████████</div>
+                </td>
+                <td>
+                    <div style="color:#D1BA74;">D1BA74</div>
+                </td>
+                <td>
+                    <div style="color:#D1BA74;">209, 186, 116</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="color:#E6CEAC;">████████████</div>
+                </td>
+                <td>
+                    <div style="color:#E6CEAC;">E6CEAC</div>
+                </td>
+                <td>
+                    <div style="color:#E6CEAC;">230, 206, 172</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="color:#ECAD9E;">████████████</div>
+                </td>
+                <td>
+                    <div style="color:#ECAD9E;">ECAD9E</div>
+                </td>
+                <td>
+                    <div style="color:#ECAD9E;">236, 173, 158</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="color:#F4606C;">████████████</div>
+                </td>
+                <td>
+                    <div style="color:#F4606C;">F4606C</div>
+                </td>
+                <td>
+                    <div style="color:#F4606C;">244, 96, 108</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="tip4">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>手机强制卸载预装</strong></p>
+            <ol>
+                <li>
+                    <p>下载安装<code>Minimal_ADB_Fastboot_v1.4.3</code>、<code>ADB</code></p>
+                </li>
+                <li>
+                    <p>手机连接电脑，打开<code>调试模式</code>，通知栏连接设置为<code>管理文件</code></p>
+                </li>
+                <li>
+                    <p>进入命令提示符，切换到ADB根目录，然后输入下面命令：</p>
+                    <p><code>adb devices</code> → <code>adb shell</code></p>
+                </li>
+                <li>
+                    <p>查找包命令：<code>pm list packages</code>（查看包对应程序可以下一个查看包名APP）</p>
+                </li>
+                <li>
+                    <p>卸载包命令：<code>pm uninstall -k --user 0 &lt;package&gt;</code></p>
+                </li>
+                <li>
+                    <p>强制停止vivo系统自动更新命令：<code>pm disable-user com.bbk.updater</code></p>
+                </li>
+            </ol>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="tip5">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>电脑文件共享</strong></p>
+            <ol>
+                <li>打开<code>计算机管理</code>→<code>本地用户和组</code>，在<code>用户</code>一栏右键点击<code>新用户</code>，该输入的输入，取消勾选<code>下次登陆时须更改密码</code>，勾选<code>用户不能更改密码</code>、<code>密码永不过期</code>，完成后关闭
+                </li>
+                <li>找到<code>共享文件夹</code>，在<code>共享</code>一栏右键点击<code>新建共享</code>，把你需要共享的文件夹填进去，OK</li>
+            </ol>
+            <p><strong>附：Windows7启动电脑时老是要先选择账户的解决办法</strong></p>
+            <ol>
+                <li>按下<kbd>Win</kbd>+<kbd>R</kbd>运行<code>control userpasswords2</code>命令</li>
+                <li>选择一个需要自动登录的账户，再取消勾选<code>要使用本机、用户必须输入用户名和密码</code>复选框，点击确定即可</li>
+            </ol>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ke">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p><strong>如何使用？</strong></p>
+            <p>打开<code>Chrome</code>（当然别的浏览器也行）后打开<code>开发者工具</code>，直接将代码复制到<code>Console</code>栏，按<kbd>Enter</kbd>键即可
+            </p>
+            <p><strong>注意事项：</strong></p>
+            <ul>
+                <li>可以后台运行，只要不关闭页面，代码就会一直运行</li>
+                <li>签到成功后会在Console栏输出“XXX时间完成签到”等字样，如果你这里已经签上了老师那边显示没数据，那就是老师网络的问题，老师问你的时候直接说“我签了”就完事了</li>
+                <li>Console栏可以设置只输出<code>Info</code>以屏蔽错误信息</li>
+            </ul>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ke1">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>开启一个<code>3秒</code>送花的定时器：</p>
+            <label for="ketext1"></label><textarea cols="80" rows="20" id="ketext1" readonly="readonly">let flower = setInterval(function () {
+    document.getElementsByClassName("toolbar-icon")[2].click();
+    console.log("送花");
+}, 3000);</textarea>
+            <input type="button" value="复制" onclick="copyText('ketext1')"><br>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ke2">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>开启一个每隔<code>5秒</code>检测一次是否有签到按钮的定时器，有的话就点击：</p>
+            <label for="ketext2"></label><textarea cols="80" rows="20" id="ketext2" readonly="readonly">let btns;
+let attend = setInterval(function () {
+    btns = document.getElementsByClassName("s-btn s-btn--primary s-btn--m");
+    if (btns.length > 0) {
+        console.log(new Date().toLocaleTimeString() + "--完成-->" + btns[0].innerText);
+        btns[0].click();
+    }
+}, 5000);</textarea>
+            <input type="button" value="复制" onclick="copyText('ketext2')"><br>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ke3">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>每隔<code>3秒</code>发送<code>886</code></p>
+            <label for="ketext3"></label><label for="ketext3"></label><textarea cols="80" rows="20" id="ketext3"
+                                                                                readonly="readonly">let say = setInterval(function () {
+    document.getElementsByClassName("ql-editor")[0].firstElementChild.innerText = "886";
+}, 3000);
+let say2 = setInterval(function () {
+    document.getElementsByClassName("text-editor-btn")[0].click();
+}, 3000)</textarea>
+            <input type="button" value="复制" onclick="copyText('ketext3')"><br>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ke4">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <p>设置好下课的时间，比如我的下课时间是<code>16:50</code>，到时间后自动发送<code>886</code></p>
+            <label for="ketext4"></label><textarea cols="80" rows="20" id="ketext4" readonly="readonly">let targetHour = "16";
+let targetMin = "50";
+let date;
+let inputed = false;
+let timing = setInterval(function () {
+    date = new Date();
+    if (date.getHours() == parseInt(targetHour) && date.getMinutes() == parseInt(targetMin)) {
+        if (!inputed) {
+            document.getElementsByClassName("ql-editor")[0].firstElementChild.innerText = "886"
+            inputed = true;
+        } else {
+            document.getElementsByClassName("text-editor-btn")[0].click();
+            window.clearInterval(timing);
+            console.log("下课咯！");
+        }
+    }
+}, 1000);</textarea>
+            <input type="button" value="复制" onclick="copyText('ketext4')"><br>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ke5">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <label for="ketext5"></label><textarea cols="80" rows="20" id="ketext5" readonly="readonly">let $switch = document.createElement("span");
+let $body = document.querySelector(".web");
+let show = true;
+$switch.innerText = "显示/隐藏";
+$switch.style = "position:absolute;top:21px;right:520px;color:#AAAAAA;border-radius:10px;cursor:pointer;z-index:3000";
+$switch.onclick = function () {
+    if (show) {
+        document.querySelector(".study-body.mr").style = "right:0;z-index:999";
+        show = false;
+    } else {
+        document.querySelector(".study-body.mr").style = "right:300px;z-index:0";
+        show = true;
+    }
+}
+$body.appendChild($switch);</textarea>
+            <input type="button" value="复制" onclick="copyText('ketext5')"><br>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ke6">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <label for="ketext6"></label><textarea cols="80" rows="20" id="ketext6" readonly="readonly">if (flower) {
+    window.clearInterval(flower);
+    console.log("已关闭送花");
+}</textarea>
+            <input type="button" value="复制" onclick="copyText('ketext6')"><br>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ke7">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <label for="ketext7"></label><textarea cols="80" rows="20" id="ketext7" readonly="readonly">if (attend) {
+    window.clearInterval(attend);
+    console.log("已关闭签到");
+}</textarea>
+            <input type="button" value="复制" onclick="copyText('ketext7')"><br>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ke8">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <label for="ketext8"></label><textarea cols="80" rows="20" id="ketext8" readonly="readonly">if (say) {
+    window.clearInterval(say);
+    window.clearInterval(say2);
+    console.log("已关闭刷屏");
+}</textarea>
+            <input type="button" value="复制" onclick="copyText('ketext8')"><br>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<div class="popup" id="ke9">
+    <div class="popup-inner">
+        <div class="popup_allText">
+            <label for="ketext9"></label><textarea cols="80" rows="20" id="ketext9" readonly="readonly">if (timing) {
+    window.clearInterval(timing);
+    console.log("提前关闭下课提示");
+}</textarea>
+            <input type="button" value="复制" onclick="copyText('ketext9')"><br>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+<script type="text/javascript">
+    window.onscroll = function () {
+        scrollFunction()
+    };
+
+    // 当网页向下滑动 180px 出现"返回顶部" 按钮
+    function scrollFunction() {
+        console.log(121);
+        if (document.body.scrollTop > 180 || document.documentElement.scrollTop > 180) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+
+    // 点击按钮，返回顶部
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
+    function showAlert() {
+        alert("点我没用哦，请点我右边的那些选项^_^");
+    }
+
+    function copyText(id) {
+        const e = document.getElementById(id);
+        e.select(); //选择对象
+        document.execCommand("Copy"); //执行浏览器复制命令
+        self.location.href = "#"
+    }
+
+</script>
+</body>
+</html>
